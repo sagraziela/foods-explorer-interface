@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useCart } from "../../hooks/cart";
+import { useParams, Link } from "react-router-dom";
 import { 
     Container, 
     Content, 
@@ -15,43 +16,43 @@ import { Button } from "../../components/Button";
 import { Ingredient } from "../../components/Ingredient";
 import foodImgPlaceholder from "../../assets/foods/placeholder.png";
 import arrowLeft from "../../assets/icons/arrow_left.svg"
-import alfaceImg from "../../assets/ingredients/alface.png";
-import tomateImg from "../../assets/ingredients/tomate.png";
-import rabaneteImg from "../../assets/ingredients/rabanete.png";
-import paoNaanImg from "../../assets/ingredients/pao-naan.png";
 import receiptImg from "../../assets/icons/receipt.svg";
 import { api } from "../../services/api";
-import { keyHandler } from "react-slick/lib/utils/innerSliderUtils";
 
 export function FoodDetails() {
 
     const [food, setFood] = useState({});
-    const [ingredientTags, setIngredientTags] = useState([]);
+
+    const [quantity, setQuantity] = useState(1)
+
+    const { handleAddItemToCart } = useCart();
 
     const pictureURL = food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder;
 
     const params = useParams();
 
+    function handleUpdateCart() {
+        console.log(food)
+        handleAddItemToCart(food, quantity)
+    }
+
     useEffect(() => {
         async function fetchFood() {
             const response = await api.get(`/foods/${params.id}`);
-            console.log(response.data)
-            setFood(response.data[0])
-            setIngredientTags(response.data['ingredients'])
+            setFood(response.data)
         }
-
-        console.log(ingredientTags)
 
         fetchFood()
     }, []);
+
     return (
         <Container>
             <Header />
 
-            <a href="/">
+            <Link to="/">
                 <img src={arrowLeft} alt="seta para esquerda" />
                 voltar
-            </a>
+            </Link>
 
             <Content>
                 
@@ -66,11 +67,12 @@ export function FoodDetails() {
                         </FoodDescription>
 
                         <List>
-                            { ingredientTags[0] &&
-                                ingredientTags.map(ingredient => (
+                            { food.ingredients &&
+                                food.ingredients.map((ingredient, index) => (
                                     <Ingredient 
+                                    key={String(index)}
                                     name={ingredient.name}
-                                    picture={alfaceImg}
+                                    picture={`${api.defaults.baseURL}/foodimg/${ingredient.picture}`}
                                     />
                                 ))
                             }
@@ -80,11 +82,12 @@ export function FoodDetails() {
                             <Price>R$ {food.price} </Price>
                             
                             <div>
-                                <Counter />
+                                <Counter setQuantity={setQuantity} />
 
                                 <Button 
                                 title="Incluir"
                                 icon={receiptImg}
+                                onClick={() => handleAddItemToCart({food, quantity})}
                                 />
                             </div>
                         </PriceAndQuantitySection>

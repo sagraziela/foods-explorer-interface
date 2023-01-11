@@ -24,36 +24,38 @@ export function NewFood() {
 
     const [foodImage, setFoodImage] = useState({ picture: "", file: null});
 
-    const navigate = useNavigate();
+    const navigate = new useNavigate();
 
     function handleChange(e) {
         setState({...state, [e.target.name]: e.target.value});
     }
     
+    function handleChangeFoodImg(e) {
+        const file = e.target.files[0];
+        const imgPreview = URL.createObjectURL(file);
+        
+        setFoodImage({ picture: imgPreview, file });
+    }
+    
+    function handleChangeIngredientImg(e) {
+        const file = e.target.files[0];
+        const imgPreview = URL.createObjectURL(file);
+        
+        setTag({...tag, picture: imgPreview, file});
+    }
+    
     function handleAddIngredient() {
         setIngredients([...ingredients, tag]);
     }
-
-    useEffect(() => {
-        console.log(tag)
-        setTag({ name: "", picture: "", file: null });
-    }, [ingredients])
-
+    
     function handleRemoveIngredient(deleted) {
-        const filteredIngredients = ingredients.filter(ingredient => ingredient.name !== deleted.name);
+        const filteredIngredients = ingredients.filter(ingredient => ingredient.name !== deleted);
         setIngredients(filteredIngredients)
     }
-
-    function handleChangePicture(e) {
-        const file = e.target.files[0];
-        const imgPreview = URL.createObjectURL(file);
-
-        setFoodImage({ picture: imgPreview, file });
-    }
-
+    
     async function saveNewFood(e) {
         e.preventDefault();
-
+        
         if (!state.title) {
             return alert("É necessário definir o nome do novo prato para cadastrá-lo.")
         }
@@ -93,19 +95,26 @@ export function NewFood() {
             });
             await pictureUpload({ food: createdFood.data, imageFile: foodImage.file });
             
-            const createdIngredients = await api.get(`${api.defaults.baseURL}/ingredients/${createdFood.data.id}`)
+            const fetchedIngredients = await api.get(`${api.defaults.baseURL}/ingredients/${createdFood.data.id}`)
             
-            createdIngredients.data.map( async createdIngr => {
-                console.log(createdIngr)
-                const matchIngredient = ingredients.filter(ingredient => createdIngr.name === ingredient.name);
+            fetchedIngredients.data.map( async createdIngr => {
+                const matchedIngredient = ingredients.filter(ingredient => createdIngr.name === ingredient.name);
 
-                await pictureUpload({ ingredient: createdIngr, imageFile: matchIngredient.file });
+                await pictureUpload({ 
+                    ingredient: createdIngr, 
+                    imageFile: matchedIngredient[0].file 
+                });
             })
             
 
-            const confirmation = confirm(`Prato "${state.title}" cadastrado com sucesso! Deseja cadastrar um novo prato?`);
+            const confirmation = confirm(`"${state.title}" cadastrado com sucesso! Deseja cadastrar um novo prato?`);
 
-            confirmation ? setState({ title: "", category: "", ingredients: [], price: "", description: "", picture: null }) : navigate("/");
+            if (confirmation)  {
+                setState({ title: "", category: "", price: "", description: "", picture: null });
+                setIngredients([]);
+            } else {
+                navigate("/")
+            }
 
         } catch(error) {
             if(error.response) {
@@ -116,13 +125,14 @@ export function NewFood() {
         }
     }
 
-    return (
+    useEffect(() => {
+        setTag({ name: "", picture: "", file: null });
+    }, [ingredients])
 
-      
+    return (
         <Container>
             <Header />
-            {console.log("PAGE:", tag, setTag)}
-            
+
             <main>
                 <a href="/home">
                     <img src={arrowLeftImg} alt="seta para esquerda" />
@@ -149,7 +159,7 @@ export function NewFood() {
                                 type="file" 
                                 id="foodImg"
                                 name="picture"
-                                onChange={handleChangePicture}
+                                onChange={handleChangeFoodImg}
                                 />
                             </ImageUpload>
                         </div>
@@ -172,7 +182,7 @@ export function NewFood() {
                                         <TagInput
                                         key={String(index)}
                                         value={ingredient.name}
-                                        fileName={ingredient.file.name}
+                                        fileName={ingredient.file && ingredient.file.name}
                                         onClick={() => handleRemoveIngredient(ingredient.name)}
                                         />
                                      ))
@@ -181,11 +191,10 @@ export function NewFood() {
                                 <TagInput 
                                 isNew
                                 name="tag"
+                                placeholder="Adicionar" 
                                 value={tag.name}
                                 fileName={tag.file && tag.file.name}
-                                tag={tag}
-                                setTag={setTag}
-                                placeholder="Adicionar" 
+                                handleChangeImg={handleChangeIngredientImg}
                                 onChange={e => setTag({...tag, name: e.target.value})}
                                 onClick={handleAddIngredient}
                                 />

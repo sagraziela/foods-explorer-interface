@@ -9,6 +9,7 @@ import receiptIcon from "../../assets/icons/receipt.svg";
 export function PayBox() {
 
     function changePayMethod(e) {
+        console.log(e.target)
     }
 
     return (
@@ -29,20 +30,21 @@ export function PayBox() {
                 </button>
             </div>
 
-            <div className="qrcode hide">
+            <div className="qrCode hide">
                 <img src={qrcode} alt="qrcode" />
             </div>
 
             <div className="creditCard">
                 <Input
+                type="number"
                 label="Número do cartão"
                 placeholder="0000 0000 0000 0000"
                 />
 
                 <div>
                     <Input 
+                    type="month"
                     label="Validade"
-                    placeholder="MM/AAAA"
                     />
 
                     <Input 

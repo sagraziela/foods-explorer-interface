@@ -12,8 +12,22 @@ export const Container = styled.div`
     > main {
         grid-area: content;
         display: flex;
+        justify-content: center;
         gap: ${px2vw(196)};
-        margin: 34px ${px2vw(196)} auto ${px2vw(120)};
+        margin: 34px auto;
+
+        h2 {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 18px;
+        }
+
+        > section {
+            > p {
+                font-size: 24px;
+                margin-top: 24px;
+            }
+        }
     }
 `;
 
@@ -27,9 +41,16 @@ export const ItemRequest = styled.li`
     > div {
         display: flex;
         flex-direction: column;
+        gap: 12px;
         margin: auto 0;
 
         > p {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             > span {
                 font-size: 12px;
             }

@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { CartProvider } from "../hooks/cart";
 import { Home } from "../pages/Home";
 import { FoodDetails } from "../pages/FoodDetails";
 import { RequestsUser } from "../pages/RequestsUser";
@@ -8,13 +9,15 @@ import { Payment } from "../pages/Payment";
 
 export function AppRoutes() {
     return (
-        <Routes>
-            <Route path="/" element={ <Home /> } />
-            <Route path="/food-details/:id" element={ <FoodDetails /> } />
-            <Route path="/requests-user" element={ <RequestsUser /> } />
-            <Route path="/requests-admin" element={ <RequestsAdmin /> } />
-            <Route path="/new-food" element={ <NewFood /> } />
-            <Route path="/payment" element={ <Payment /> } />
-        </Routes>
+        <CartProvider>
+            <Routes>
+                <Route path="/" element={ <Home /> } />
+                <Route path="/food-details/:id" element={ <FoodDetails /> } />
+                <Route path="/requests-user" element={ <RequestsUser /> } />
+                <Route path="/requests-admin" element={ <RequestsAdmin /> } />
+                <Route path="/new-food" element={ <NewFood /> } />
+                <Route path="/payment" element={ <Payment /> } />
+            </Routes>
+        </CartProvider>
     )
 }

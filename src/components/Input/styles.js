@@ -19,8 +19,14 @@ export const Container = styled.div`
         font-size: 16px;
         color: ${({ theme }) => theme.COLORS.GRAY_100};
 
+
         ::placeholder {
             color: ${({ theme }) => theme.COLORS.GRAY_300};
+        }
+
+        ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
         }
     }
 

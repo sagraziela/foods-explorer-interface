@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Content, Heading } from "./styles";
+import { useCart } from "../../hooks/cart";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Card } from "../../components/Card";

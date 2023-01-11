@@ -1,19 +1,9 @@
-import { useState } from "react";
 import { Container, ImageUpload } from "./styles";
 import iconX from "../../assets/icons/iconX.svg";
 import iconPlus from "../../assets/icons/iconPlus_small.svg";
 import uploadImg from "../../assets/icons/upload.svg"
-import defaultProps from "react-slick/lib/default-props";
 
-export function TagInput({ value, fileName, isNew, onClick, tag, setTag, onChange, ...rest }) {
-
-    function handleChangePic(e) {
-        const file = e.target.files[0];
-        const imgPreview = URL.createObjectURL(file);
-        console.log("TAG:", tag, setTag)
-
-        setTag({...tag, picture: imgPreview, file});
-    }
+export function TagInput({ value, fileName, isNew, onClick, onChange, handleChangeImg, ...rest }) {
 
     return (
         <Container isNew={isNew}>
@@ -26,15 +16,15 @@ export function TagInput({ value, fileName, isNew, onClick, tag, setTag, onChang
             />
 
             <div>
-                <ImageUpload htmlFor="tagImg">
+                <ImageUpload htmlFor={value}>
                     <img src={uploadImg} alt="ícone de upload" />
 
                     <span>{fileName}</span>             
                     
                     <input 
                     type="file" 
-                    id="tagImg"
-                    onChange={handleChangePic}
+                    id={value}
+                    onChange={handleChangeImg}
                     />
                 </ImageUpload>    
 

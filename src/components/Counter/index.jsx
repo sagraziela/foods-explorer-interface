@@ -3,13 +3,13 @@ import { Container } from "./styles";
 import plusBtn from "../../assets/icons/plus.svg";
 import minusBtn from "../../assets/icons/minus.svg";
 
-export function Counter() {
+export function Counter({ setQuantity }) {
     const [state, setState] = useState("01");
 
     function handleIncrease() {
-        const plusOne = Number(state) + 1;
+        const plusOne = String(Number(state) + 1).padStart(2, "0");
 
-        plusOne < 10 ? setState(0 + String(plusOne)) : setState(plusOne);
+        return setState(plusOne);
     }
 
     function handleDecrease() {
@@ -17,17 +17,23 @@ export function Counter() {
             return;
         };
 
-        const minusOne = Number(state) - 1;
+        const minusOne = String(Number(state) - 1).padStart(2, "0");
 
-        minusOne < 10 ? setState(0 + String(minusOne)) : setState(minusOne);
+        return setState(minusOne);
     }
+
+    useEffect(() => {
+        if (state !== "01") {
+            setQuantity(state)
+        }
+    }, [state])
 
     return (
         <Container>
             <button
             onClick={handleDecrease}
             >
-                <img src={minusBtn} alt="" />
+                <img src={minusBtn} alt="minus" />
             </button>
 
             <p>{state}</p>
@@ -35,7 +41,7 @@ export function Counter() {
             <button
             onClick={handleIncrease}
             >
-                <img src={plusBtn} alt="" />
+                <img src={plusBtn} alt="plus" />
             </button>
         </Container>
     )
