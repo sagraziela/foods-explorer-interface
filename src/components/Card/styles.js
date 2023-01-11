@@ -15,13 +15,30 @@ export const Container = styled.div`
 
     background-color: ${({ theme }) => theme.COLORS.BLACK_TRANSPARENT};
 
-    > div {
+    > button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        transition: .3s;
+
         > img {
             width: 26px;
             height: 22px;
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            margin: auto;
+        }
+
+        :hover {
+            border: 2px solid ${({ theme }) => theme.COLORS.BLUE_200};
+            border-radius: 4px;
         }
     }
 

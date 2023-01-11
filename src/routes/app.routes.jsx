@@ -6,6 +6,7 @@ import { RequestsUser } from "../pages/RequestsUser";
 import { RequestsAdmin } from "../pages/RequestsAdmin";
 import { NewFood } from "../pages/NewFood";
 import { Payment } from "../pages/Payment";
+import { Favorites } from "../pages/Favorites";
 
 export function AppRoutes() {
     return (
@@ -17,6 +18,7 @@ export function AppRoutes() {
                 <Route path="/requests-admin" element={ <RequestsAdmin /> } />
                 <Route path="/new-food" element={ <NewFood /> } />
                 <Route path="/payment" element={ <Payment /> } />
+                <Route path="/favorites" element={ <Favorites /> } />
             </Routes>
         </CartProvider>
     )

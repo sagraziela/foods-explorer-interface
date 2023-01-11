@@ -13,6 +13,8 @@ export function Home() {
 
     const [ foods, setFoods ] = useState([]);
 
+    const [ search, setSearch ] = useState("");
+
     const mainDishes = foods.filter(food => food.category === "prato principal");
     const deserts = foods.filter(food => food.category === "sobremesa");
     const drinks = foods.filter(food => food.category === "bebida");
@@ -20,7 +22,7 @@ export function Home() {
     useEffect(() => {
         async function fetchFoods() {
             try {
-                const response = await api.get(`/foods?userSearch`);
+                const response = await api.get(`/foods?userSearch=${search}`);
                 setFoods(response.data)
             } catch (error) {
                 return error.response ? error.response.data.message : "Não foi possível conectar com o banco de dados."
@@ -28,25 +30,41 @@ export function Home() {
         }
 
         fetchFoods();
-    }, []);
+    }, [search]);
 
     return (
         <Container>
-            <Header/>
+            <Header setSearch={setSearch}/>
 
-            <Content>
-                <Heading>
-                    <img src={homeImg} alt="Imagem de macarons e frutas vermelhas" />
+            { !search &&
+                <Content>
+                    <Heading>
+                        <img src={homeImg} alt="Imagem de macarons e frutas vermelhas" />
 
-                    <div>
-                        <h2>Sabores inigualáveis</h2>
-                        <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
-                    </div>
-                </Heading>                
+                        <div>
+                            <h2>Sabores inigualáveis</h2>
+                            <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
+                        </div>
+                    </Heading>                
 
-                <Section title="Pratos Principais" >
-                    { mainDishes[0] &&
-                            mainDishes.map(food => (
+                    <Section title="Pratos Principais" >
+                        { mainDishes[0] &&
+                                mainDishes.map(food => (
+                                    <Card
+                                    key={food.id}
+                                    id={food.id}
+                                    title={food.title}
+                                    description={food.description}
+                                    picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
+                                    price={food.price}
+                                    /> 
+                                ))
+                        }                
+                    </Section>
+
+                    <Section title="Sobremesas" >
+                        { deserts[0] &&
+                            deserts.map(food => (
                                 <Card
                                 key={food.id}
                                 id={food.id}
@@ -56,39 +74,44 @@ export function Home() {
                                 price={food.price}
                                 /> 
                             ))
-                    }                
-                </Section>
+                        } 
+                    </Section>
 
-                <Section title="Sobremesas" >
-                    { deserts[0] &&
-                        deserts.map(food => (
-                            <Card
-                            key={food.id}
-                            id={food.id}
-                            title={food.title}
-                            description={food.description}
-                            picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
-                            price={food.price}
-                            /> 
-                        ))
-                    } 
-                </Section>
+                    <Section title="Bebidas" >
+                        { drinks[0] &&
+                            drinks.map(food => (
+                                <Card
+                                key={food.id}
+                                id={food.id}
+                                title={food.title}
+                                description={food.description}
+                                picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
+                                price={food.price}
+                                /> 
+                            ))
+                        } 
+                    </Section>
+                </Content>
+            }
 
-                <Section title="Bebidas" >
-                    { drinks[0] &&
-                        drinks.map(food => (
-                            <Card
-                            key={food.id}
-                            id={food.id}
-                            title={food.title}
-                            description={food.description}
-                            picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
-                            price={food.price}
-                            /> 
-                        ))
-                    } 
-                </Section>
-            </Content>
+            { search &&
+                <Content>
+                    <Section title={`Busca: "${search}"`} >
+                        { foods[0] &&
+                                foods.map(food => (
+                                    <Card
+                                    key={food.id}
+                                    id={food.id}
+                                    title={food.title}
+                                    description={food.description}
+                                    picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
+                                    price={food.price}
+                                    /> 
+                                ))
+                        }                
+                    </Section>
+                </Content>
+            }
 
             <Footer/>
 

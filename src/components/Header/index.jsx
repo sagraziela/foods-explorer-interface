@@ -55,14 +55,14 @@ export function Header({ setSearch }) {
         <Logo />
       </Link>
 
-      <a href="#">Meus favoritos</a>
+      <Link to={"/favorites"}>Meus favoritos</Link>
 
       <SearchInput>
         <img src={searchImg} alt="lupa" />
         <input 
         type="text" 
         placeholder="Busque pelas opções de pratos"
-        onChange={setSearch}
+        onChange={e => setSearch(e.target.value)}
         />
       </SearchInput>
 
