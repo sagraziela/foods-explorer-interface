@@ -24,7 +24,7 @@ export const Heading = styled.div`
     height: 260px;
     background-color: ${({ theme }) => theme.COLORS.GRAY_700};
     position: relative;
-    margin: ${px2vw(100)} auto 64px;
+    margin: ${px2vw(150)} auto 64px;
     border-radius: 8px;
 
     display: grid;

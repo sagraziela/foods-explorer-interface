@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Content, Heading } from "./styles";
+import { useAuth } from "../../hooks/auth";
 import { useCart } from "../../hooks/cart";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
@@ -12,8 +13,12 @@ import foodImgPlaceholder from "../../assets/foods/placeholder.png";
 export function Home() {
 
     const [ foods, setFoods ] = useState([]);
-
+    
+    const [ favorites, setFavorites ] = useState([]);
+    
     const [ search, setSearch ] = useState("");
+    
+    const { user } = useAuth();
 
     const mainDishes = foods.filter(food => food.category === "prato principal");
     const deserts = foods.filter(food => food.category === "sobremesa");
@@ -22,8 +27,18 @@ export function Home() {
     useEffect(() => {
         async function fetchFoods() {
             try {
-                const response = await api.get(`/foods?userSearch=${search}`);
-                setFoods(response.data)
+                const responseFoods = await api.get(`/foods?userSearch=${search}`);
+
+                const userFavs = await api.get(`/favorites/${user.id}`);
+
+                const updatedFoods = responseFoods.data.map(food => {
+                    const foodIsFav = userFavs.data.find(fav => fav.fav_food === food.title)
+
+                    return foodIsFav ? {...food, isFav: true} : food;
+                })
+                console.log(updatedFoods)
+                setFoods(updatedFoods)
+
             } catch (error) {
                 return error.response ? error.response.data.message : "Não foi possível conectar com o banco de dados."
             }
@@ -57,6 +72,7 @@ export function Home() {
                                     description={food.description}
                                     picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
                                     price={food.price}
+                                    isFav={food.isFav}
                                     /> 
                                 ))
                         }                
@@ -72,6 +88,7 @@ export function Home() {
                                 description={food.description}
                                 picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
                                 price={food.price}
+                                isFav={food.isFav}
                                 /> 
                             ))
                         } 
@@ -87,6 +104,7 @@ export function Home() {
                                 description={food.description}
                                 picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
                                 price={food.price}
+                                isFav={food.isFav}
                                 /> 
                             ))
                         } 
