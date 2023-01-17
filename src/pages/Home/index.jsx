@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Content, Heading } from "./styles";
 import { useAuth } from "../../hooks/auth";
-import { useCart } from "../../hooks/cart";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Card } from "../../components/Card";
@@ -13,8 +12,6 @@ import foodImgPlaceholder from "../../assets/foods/placeholder.png";
 export function Home() {
 
     const [ foods, setFoods ] = useState([]);
-    
-    const [ favorites, setFavorites ] = useState([]);
     
     const [ search, setSearch ] = useState("");
     
@@ -34,9 +31,9 @@ export function Home() {
                 const updatedFoods = responseFoods.data.map(food => {
                     const foodIsFav = userFavs.data.find(fav => fav.fav_food === food.title)
 
-                    return foodIsFav ? {...food, isFav: true} : food;
+                    return foodIsFav ? {...food, isFav: 1} : food;
                 })
-                console.log(updatedFoods)
+                
                 setFoods(updatedFoods)
 
             } catch (error) {
@@ -62,25 +59,9 @@ export function Home() {
                         </div>
                     </Heading>                
 
-                    <Section title="Pratos Principais" >
-                        { mainDishes[0] &&
-                                mainDishes.map(food => (
-                                    <Card
-                                    key={food.id}
-                                    id={food.id}
-                                    title={food.title}
-                                    description={food.description}
-                                    picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
-                                    price={food.price}
-                                    isFav={food.isFav}
-                                    /> 
-                                ))
-                        }                
-                    </Section>
-
-                    <Section title="Sobremesas" >
-                        { deserts[0] &&
-                            deserts.map(food => (
+                    { mainDishes[0] &&
+                        <Section title="Pratos Principais" >
+                            {mainDishes.map(food => (
                                 <Card
                                 key={food.id}
                                 id={food.id}
@@ -88,15 +69,15 @@ export function Home() {
                                 description={food.description}
                                 picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
                                 price={food.price}
-                                isFav={food.isFav}
+                                isFav={food.isFav === 1 ? true : false}
                                 /> 
-                            ))
-                        } 
-                    </Section>
+                            ))}                
+                        </Section>
+                    }
 
-                    <Section title="Bebidas" >
-                        { drinks[0] &&
-                            drinks.map(food => (
+                    { deserts[0] &&
+                        <Section title="Sobremesas" >
+                            {deserts.map(food => (
                                 <Card
                                 key={food.id}
                                 id={food.id}
@@ -104,11 +85,27 @@ export function Home() {
                                 description={food.description}
                                 picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
                                 price={food.price}
-                                isFav={food.isFav}
+                                isFav={food.isFav === 1 ? true : false}
                                 /> 
-                            ))
-                        } 
+                            ))}
+                        </Section>
+                    }
+
+                    { drinks[0] &&
+                        <Section title="Bebidas" >
+                            {drinks.map(food => (
+                                <Card
+                                key={food.id}
+                                id={food.id}
+                                title={food.title}
+                                description={food.description}
+                                picture={food.picture ? `${api.defaults.baseURL}/foodimg/${food.picture}` : foodImgPlaceholder}
+                                price={food.price}
+                                isFav={food.isFav === 1 ? true : false}
+                                /> 
+                            ))} 
                     </Section>
+                    }
                 </Content>
             }
 

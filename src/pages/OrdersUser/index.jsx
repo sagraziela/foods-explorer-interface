@@ -2,7 +2,7 @@ import { Container, Table } from "./styles";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 
-export function RequestsUser() {
+export function OrdersUser() {
     return (
         <Container>
             <Header />

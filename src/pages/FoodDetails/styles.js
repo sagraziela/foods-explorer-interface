@@ -163,7 +163,8 @@ export const FoodDescription = styled.div`
 
 export const List = styled.ul`
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
+    justify-content: flex-start;
     gap: ${px2vw(24)};
     list-style: none;
 
@@ -205,6 +206,7 @@ export const PriceAndQuantitySection = styled.div`
 export const Price = styled.p`
     font-size: 32px;
     width: fit-content;
+    white-space: nowrap;
     color: ${({ theme }) => theme.COLORS.BLUE_200};
     display: flex;
 `;

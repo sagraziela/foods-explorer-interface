@@ -3,11 +3,12 @@ import { useCart } from "../../hooks/cart";
 import { Container, FoodDescription, PriceAndQuantitySection, Price} from "./styles";
 import { Counter } from "../Counter";
 import { Button } from "../Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import heartImg from "../../assets/icons/heart.svg";
 import selectedHeartImg from "../../assets/icons/heart-selected.svg";
 import receiptImg from "../../assets/icons/receipt.svg";
+import editIcon from "../../assets/icons/icons8-edit-24.png";
 import { useAuth } from "../../hooks/auth";
 
 export function Card({ id, title, description, picture, price, isFav }) {
@@ -19,6 +20,8 @@ export function Card({ id, title, description, picture, price, isFav }) {
     const { handleAddItemToCart } = useCart();
 
     const food = { id, title, description, picture, price }
+
+    const navigate = useNavigate();
 
     async function handleAddToFavorites() {
 
@@ -43,17 +46,19 @@ export function Card({ id, title, description, picture, price, isFav }) {
     return (
         <Container isFav={isFav}>
             
-            <button
-            onClick={() => handleAddToFavorites()}
-            >
-                { !isFav &&
-                    <img src={heartImg} alt="ícone de coração não selecionado" />
-                }
-                
-                { isFav &&
-                    <img src={selectedHeartImg} alt="ícone de coração selecionado" />
-                }
-            </button>
+            { user.admin === 0 &&
+                <button
+                onClick={() => handleAddToFavorites()}
+                >
+                    { !isFav &&
+                        <img src={heartImg} alt="ícone de coração não selecionado" />
+                    }
+                    
+                    { isFav &&
+                        <img src={selectedHeartImg} alt="ícone de coração selecionado" />
+                    }
+                </button>
+            }
 
             <img src={picture} alt={`Foto ilustrativa do/da "${title}".`} />
 
@@ -69,15 +74,26 @@ export function Card({ id, title, description, picture, price, isFav }) {
                 <PriceAndQuantitySection>
                     <Price>R$ {price}</Price>
                     
-                    <div>
-                        <Counter setQuantity={setQuantity} />
+                    { user.admin === 0 &&
+                        <div>
+                            <Counter setQuantity={setQuantity} />
 
+                            <Button 
+                            title="Incluir"
+                            icon={receiptImg}
+                            onClick={() => handleAddItemToCart({food, quantity})}
+                            />
+                        </div>
+                    }
+
+                    { user.admin === 1 &&
                         <Button 
-                        title="Incluir"
-                        icon={receiptImg}
-                        onClick={() => handleAddItemToCart({food, quantity})}
+                        title="Editar"
+                        icon={editIcon}
+                        onClick={() => navigate(`/edit-food/${food.id}`)}
                         />
-                    </div>
+                    }
+                    
                 </PriceAndQuantitySection>
             </section>
         </Container>

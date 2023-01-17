@@ -6,6 +6,7 @@ import { Logo } from "../Logo";
 import { Button } from "../Button";
 import searchImg from "../../assets/icons/search_img.svg";
 import receiptImg from "../../assets/icons/receipt.svg"
+import plusIcon from "../../assets/icons/plus.svg"
 import signOutImg from "../../assets/icons/sign_out_symbol.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -14,11 +15,11 @@ export function Header({ setSearch }) {
 
   const [itemsQuantity, setItemsQuantity] = useState(0);
 
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
 
   const { cart, clearCart } = useCart();
 
-  const navigate = new useNavigate();
+  const navigate = useNavigate();
 
   function handleSignOut() {
     const assureSignOut = confirm("Tem certeza que deseja sair da aplicação?");
@@ -27,8 +28,6 @@ export function Header({ setSearch }) {
       signOut()
       clearCart()
     }
-    
-    return
   }
 
 
@@ -46,8 +45,7 @@ export function Header({ setSearch }) {
 
       setItemsQuantity(total)
     }
-  }, [cart])
-  
+  }, [cart]);
 
   return (
     <Container>
@@ -55,7 +53,13 @@ export function Header({ setSearch }) {
         <Logo />
       </Link>
 
-      <Link to={"/favorites"}>Meus favoritos</Link>
+      { user.admin === 0 &&
+        <Link to={"/favorites"}>Meus favoritos</Link>
+      }
+
+      { user.admin === 1 &&
+        <Link to={"/orders-admin"}>Pedidos</Link>
+      }
 
       <SearchInput>
         <img src={searchImg} alt="lupa" />
@@ -66,11 +70,21 @@ export function Header({ setSearch }) {
         />
       </SearchInput>
 
-      <Button
-        icon={receiptImg}
-        title={`Meu pedido (${itemsQuantity})`}
-        onClick={() => navigate("/payment")}
-      />
+      { user.admin === 0 &&
+          <Button
+          icon={receiptImg}
+          title={`Meu pedido (${itemsQuantity})`}
+          onClick={() => navigate("/payment")}
+          />
+      }
+
+      { user.admin === 1 &&
+          <Button
+          icon={plusIcon}
+          title="Adicionar prato"
+          onClick={() => navigate("/new-food")}
+          />
+      }
 
       <a href="/" onClick={handleSignOut}>
         <img src={signOutImg} alt="" />

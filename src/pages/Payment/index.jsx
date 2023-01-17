@@ -4,13 +4,32 @@ import { Container, ItemRequest } from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { PayBox } from "../../components/PayBox";
+import { api } from "../../services/api";
 import placeholderImg from "../../assets/foods/placeholder.png"
+import { useAuth } from "../../hooks/auth";
 
 export function Payment() {
 
     const [totalPrice, setTotalPrice] = useState();
 
     const { cart, handleRemoveItemFromCart } = useCart();
+
+    const { user } = useAuth();
+
+    async function handleConfirmOrder() {
+        const arrayItemsBrief = cart.map(item => {
+            const itemBrief = `${item.quantity}x ${item.title}`;
+            console.log(itemBrief)
+            return itemBrief;
+        });
+
+        const items = arrayItemsBrief.join(', ');
+
+        const order = {items, user_id: user.id}
+
+        const response = await api.post(`/orders/${user.id}`, order);
+        console.log(response)
+    }
 
     useEffect(() => {
         if (cart[0]) {
@@ -44,7 +63,7 @@ export function Payment() {
                             cart.map(item => (
                                 <ItemRequest key={item.id}>
                                     <img 
-                                    src={item.picture ? item.picture : placeholderImg} 
+                                    src={item.picture ? `${api.defaults.baseURL}/foodimg/${item.picture}` : placeholderImg} 
                                     alt={`Imagem ${item.title}`} />
 
                                     <div>
@@ -71,7 +90,9 @@ export function Payment() {
                 <div>
                     <h2>Pagamento</h2>
 
-                    <PayBox />
+                    <PayBox 
+                    onCLick={handleConfirmOrder}
+                    />
                 </div>
             </main>
 

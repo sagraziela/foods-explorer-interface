@@ -21,7 +21,7 @@ export const Content = styled.div`
 
 export const Heading = styled.div`
     width: ${px2vw(1120)};
-    height: 260px;
+    height: ${px2vw(260)};
     background-color: ${({ theme }) => theme.COLORS.GRAY_700};
     position: relative;
     margin: ${px2vw(150)} auto 64px;
@@ -48,14 +48,14 @@ export const Heading = styled.div`
         font-family: 'Poppins', sans-serif;
 
         > h2 {
-            font-size: 40px;
-            line-height: 56px;
+            font-size: ${px2vw(40)};
+            line-height: ${px2vw(56)};
             font-weight: 500;
         }
 
         > p {
-            font-size: 16px;
-            line-height: 22px;
+            font-size: ${px2vw(16)};
+            line-height: ${px2vw(30)};
         }
     }
 `;

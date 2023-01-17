@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import { Container, ImageUpload, Form, Textarea, Ingredients } from "./styles";
 import { Header } from "../../components/Header";
@@ -12,22 +12,24 @@ import arrowLeftImg from "../../assets/icons/arrow_left.svg";
 import uploadImg from "../../assets/icons/upload.svg";
 import { useEffect } from "react";
 
-export function NewFood() {
+export function EditFood() {
     
-    const [state, setState] = useState({ title: "", category: "", price: "", description: "", picture: null });
+    const [food, setFood] = useState({});
 
-    const [ingredients, setIngredients] = useState([]);
+    const [ingredientsDB, setIngredientsDB] = useState([]);
 
     const [tag, setTag] = useState({ name: "", picture: "", file: null });
 
-    const { pictureUpload } = useAuth();
+    const { user, pictureUpload } = useAuth();
 
     const [foodImage, setFoodImage] = useState({ picture: "", file: null});
 
     const navigate = new useNavigate();
 
+    const params = useParams();
+
     function handleChange(e) {
-        setState({...state, [e.target.name]: e.target.value});
+        setFood({...food, [e.target.name]: e.target.value});
     }
     
     function handleChangeFoodImg(e) {
@@ -40,81 +42,90 @@ export function NewFood() {
     function handleChangeIngredientImg(e) {
         const file = e.target.files[0];
         const imgPreview = URL.createObjectURL(file);
+        console.log(file)
         
         setTag({...tag, picture: imgPreview, file});
     }
     
     function handleAddIngredient() {
-        setIngredients([...ingredients, tag]);
+        setFood({...food, ingredients: [...food.ingredients, tag]});
     }
     
     function handleRemoveIngredient(deleted) {
-        const filteredIngredients = ingredients.filter(ingredient => ingredient.name !== deleted);
-        setIngredients(filteredIngredients)
+        const filteredIngredients = food.ingredients.filter(ingredient => ingredient.name !== deleted);
+        setFood({...food, ingredients: filteredIngredients});
+    }
+
+    async function handleAddNewIngredientsToDB(newItems) {
+        console.log(newItems)
+        const newIngredients = await api.post(`/ingredients/${food.id}`, { ingredients: newItems });
+        console.log(newIngredients)
+
+        /*await pictureUpload({ 
+            ingredient: newIngredients[0], 
+            imageFile: item.file 
+        });*/
+
+        newIngredients.data.map( async createdIngr => {
+            const matchedIngredient = food.ingredients.find(ingredient => createdIngr.name === ingredient.name);
+
+            await pictureUpload({ 
+                ingredient: createdIngr, 
+                imageFile: matchedIngredient.file 
+            });
+        })
     }
     
-    async function saveNewFood(e) {
+    async function saveUpdatedFood(e) {
         e.preventDefault();
         
-        if (!state.title) {
-            return alert("É necessário definir o nome do novo prato para cadastrá-lo.")
-        }
-
-        if (foodImage.file === null) {
-            return confirm("Tem certeza que deseja salvar o novo prato sem uma foto?")
+        if (!food.title) {
+            return alert("É necessário definir o nome do prato.")
         }
 
         if (tag.name !== "") {
-            return alert(`Você digitou o ingrediente "${tag.name}", mas não o inseriu na lista.Aperte o botão "+" para adicioná-lo ou limpe o campo do novo ingrediente.`)
+            return alert(`Você digitou o ingrediente "${tag}", mas não o inseriu na lista.Aperte o botão "+" para adicioná-lo ou limpe o campo do novo ingrediente.`)
         }
 
-        if (!state.title) {
-            return alert("É necessário definir o nome do novo prato para cadastrá-lo.")
+        if (!food.category) {
+            return alert("É necessário definir a categoria do prato.")
         }
 
-        if (!state.category) {
-            return alert("É necessário definir a categoria do novo prato para cadastrá-lo.")
+        if (!food.price) {
+            return alert("É necessário definir o preço do prato.")
         }
 
-        if (!state.price) {
-            return alert("É necessário definir o preço do novo prato para cadastrá-lo.")
-        }
+        if (!food.description) {
+            const userConfirm = confirm("Tem certeza que deseja atualizar o prato sem nenhuma descrição?")
 
-        if (!state.description) {
-            const confirmNewFood = confirm("Tem certeza que deseja cadastrar o novo prato sem nenhuma descrição?")
-
-            if (!confirmNewFood) {
+            if (!userConfirm) {
                 return
             }
         }
         
         try {
-            const createdFood = await api.post(`/foods`, {
-                ...state,
-                ingredients
-            });
-            await pictureUpload({ food: createdFood.data, imageFile: foodImage.file });
-            
-            const fetchedIngredients = await api.get(`${api.defaults.baseURL}/ingredients/${createdFood.data.id}`)
-            
-            fetchedIngredients.data.map( async createdIngr => {
-                const matchedIngredient = ingredients.filter(ingredient => createdIngr.name === ingredient.name);
+            const updatedFood = await api.put(`/foods/${food.id}`, food);
 
-                await pictureUpload({ 
-                    ingredient: createdIngr, 
-                    imageFile: matchedIngredient[0].file 
-                });
-            })
+            console.log(updatedFood)
             
-
-            const confirmation = confirm(`"${state.title}" cadastrado com sucesso! Deseja cadastrar um novo prato?`);
-
-            if (confirmation)  {
-                setState({ title: "", category: "", price: "", description: "", picture: null });
-                setIngredients([]);
-            } else {
-                navigate("/")
+            if (foodImage.file) {
+                await pictureUpload({ food: updatedFood.data, imageFile: foodImage.file });
             }
+
+            ingredientsDB.map(async itemDB => {
+                const matchedItem = food.ingredients.find(item => item.id === itemDB.id);
+
+                if (!matchedItem) {
+                    await api.delete(`/ingredients/${itemDB.id}`);
+                }
+            });
+
+            const newIngredients = food.ingredients.filter(item => !item.id)
+
+            newIngredients[0] ? await handleAddNewIngredientsToDB(newIngredients) : null;
+            
+            alert(`"${food.title}" atualizado com sucesso!`);
+            navigate("/");
 
         } catch(error) {
             if(error.response) {
@@ -126,8 +137,26 @@ export function NewFood() {
     }
 
     useEffect(() => {
+        async function fetchFood() {
+            const response = await api.get(`foods/${params.id}`);
+            setFood(response.data);
+        }
+
+        fetchFood();
+    }, [])
+
+    useEffect(() => {
         setTag({ name: "", picture: "", file: null });
-    }, [ingredients])
+    }, [food.ingredients])
+
+    useEffect(() => {
+        async function fetchIngredients() {
+            const response = await api.get(`${api.defaults.baseURL}/ingredients/${params.id}`);
+            setIngredientsDB(response.data)
+        }
+
+        fetchIngredients()
+    }, [])
 
     return (
         <Container>
@@ -140,7 +169,7 @@ export function NewFood() {
                 </Link>
 
                 <Form>
-                    <h1>Cadastrar prato</h1>
+                    <h1>Editar prato</h1>
 
                     <section className="sectionOne">
                         <div>
@@ -149,8 +178,9 @@ export function NewFood() {
                                 <img src={uploadImg} alt="ícone de upload" />
                                 {
                                     !foodImage.file && 
-                                    <span>Carregue sua foto</span>
+                                    <span>{food.picture}</span>
                                 }
+
                                 {
                                     foodImage.file && 
                                     <span>{foodImage.file.name}</span>
@@ -167,8 +197,9 @@ export function NewFood() {
                         <Input 
                         label="Nome"
                         name="title"
-                        onChange={handleChange}
-                        placeholder="Ex: Salada Ceasar" 
+                        value={food.title}
+                        placeholder="Ex: Salada Ceasar"
+                        onChange={handleChange} 
                         />
                     </section>
 
@@ -177,12 +208,12 @@ export function NewFood() {
                             <p>Ingredientes</p>
 
                             <div className="tags">
-                                { ingredients[0] &&
-                                    ingredients.map((ingredient, index) => (
+                                { food.ingredients &&
+                                    food.ingredients.map((ingredient, index) => (
                                         <TagInput
                                         key={String(index)}
                                         value={ingredient.name}
-                                        fileName={ingredient.file && ingredient.file.name}
+                                        fileName={ingredient.file ? ingredient.file.name : ingredient.picture }
                                         onClick={() => handleRemoveIngredient(ingredient.name)}
                                         />
                                      ))
@@ -208,7 +239,7 @@ export function NewFood() {
                             <select 
                             name="category"
                             onChange={handleChange}
-                            defaultValue="Escolha a categoria..."
+                            value={food.category || "Escolha a categoria..."}
                             >
                                 <option value="Escolha a categoria..." disabled>
                                     Escolha a categoria...
@@ -222,8 +253,9 @@ export function NewFood() {
                         <Input 
                         label="Preço"
                         name="price"
-                        onChange={handleChange}
-                        placeholder="R$ 00,00" 
+                        value={food.price}
+                        placeholder="R$ 00,00"
+                        onChange={handleChange} 
                         />
                     </section>
                     
@@ -233,15 +265,16 @@ export function NewFood() {
                         id="description"
                         label="Descrição"
                         name="description"
-                        onChange={handleChange}
+                        value={food.description}
                         placeholder="Fale brevemente sobre o prato, sua composição e preparo."
+                        onChange={handleChange}
                         />
                     </section>
                     
                     <Button 
-                    title="Adicionar prato" 
+                    title="Salvar alterações" 
                     grayBg
-                    onClick={saveNewFood}
+                    onClick={saveUpdatedFood}
                     />
                 </Form>
             </main>

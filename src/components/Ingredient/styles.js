@@ -9,8 +9,9 @@ export const Container = styled.li`
     gap: 8px;
 
     > img {
-        height: 60px;
-        width: 60px;
+        height: auto;
+        max-width: 60px;
+        object-fit: contain;
     }
 
     > p {

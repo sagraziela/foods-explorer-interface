@@ -44,7 +44,7 @@ function AuthProvider({ children }) {
                 food.picture = response.data.picture;
             } else {
                 const response = await api.patch(`/ingredients/picture/${ingredient.id}`, fileUploadForm);
-                console.log(response.data)
+
                 ingredient.picture = response.data.picture;
             }
 

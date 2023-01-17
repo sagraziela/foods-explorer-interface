@@ -8,7 +8,7 @@ export function Footer() {
 
             <p>
                 &copy;
-                2022 - todos os direitos reservados
+                2023 - todos os direitos reservados
             </p>
         </Container>
     )

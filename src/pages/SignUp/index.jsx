@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Form } from "./styles";
 import { Logo } from "../../components/Logo";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { api } from "../../services/api";
 
 export function SignUp() {
     const [state, setState] = useState({ name: "", email: "", password: "" });
+
+    const navigate = useNavigate();
 
     function handleChange(e) {
         setState({...state, [e.target.name]: e.target.value});
@@ -19,6 +22,8 @@ export function SignUp() {
         await api.post("/users", state)
         .then(() => {
             alert("Usuário cadastrado com sucesso");
+
+            navigate("/");
 
         }).catch(error => {
             if(error.response) {
@@ -66,7 +71,7 @@ export function SignUp() {
                 onClick={handleSignUp}
                 />
 
-                <a href="/">Já tenho uma conta</a>
+                <Link to={"/"}>Já tenho uma conta</Link>
             </Form>
             
         </Container>
