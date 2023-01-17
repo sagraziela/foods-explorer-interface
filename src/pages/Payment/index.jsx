@@ -1,20 +1,23 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/auth";
 import { useCart } from "../../hooks/cart";
+import { useNavigate } from "react-router-dom";
 import { Container, ItemRequest } from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { PayBox } from "../../components/PayBox";
 import { api } from "../../services/api";
 import placeholderImg from "../../assets/foods/placeholder.png"
-import { useAuth } from "../../hooks/auth";
 
 export function Payment() {
 
     const [totalPrice, setTotalPrice] = useState();
 
-    const { cart, handleRemoveItemFromCart } = useCart();
+    const { cart, handleRemoveItemFromCart, clearCart } = useCart();
 
     const { user } = useAuth();
+
+    const navigate = useNavigate();
 
     async function handleConfirmOrder() {
         const arrayItemsBrief = cart.map(item => {
@@ -29,6 +32,10 @@ export function Payment() {
 
         const response = await api.post(`/orders/${user.id}`, order);
         console.log(response)
+        
+        clearCart()
+        alert("Seu pedido foi confirmado!")
+        navigate(`/orders/${user.id}`);
     }
 
     useEffect(() => {
@@ -63,7 +70,7 @@ export function Payment() {
                             cart.map(item => (
                                 <ItemRequest key={item.id}>
                                     <img 
-                                    src={item.picture ? `${api.defaults.baseURL}/foodimg/${item.picture}` : placeholderImg} 
+                                    src={item.picture ? item.picture : placeholderImg} 
                                     alt={`Imagem ${item.title}`} />
 
                                     <div>
@@ -91,7 +98,7 @@ export function Payment() {
                     <h2>Pagamento</h2>
 
                     <PayBox 
-                    onCLick={handleConfirmOrder}
+                    onClick={handleConfirmOrder}
                     />
                 </div>
             </main>

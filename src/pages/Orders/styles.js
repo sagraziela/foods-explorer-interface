@@ -2,6 +2,7 @@ import styled from "styled-components";
 import px2vw from "../../utils/px2vw";
 import arrowDownImg from "../../assets/icons/arrow_down.svg";
 import redDot from "../../assets/icons/redDot.svg";
+import yellowDot from "../../assets/icons/yellowDot.svg";
 import greenDot from "../../assets/icons/greenDot.svg";
 
 export const Container = styled.div`
@@ -38,11 +39,11 @@ export const Table = styled.table`
             }
 
             > :nth-child(1) {
-                width: 18%;
+                width: 15%;
             }
 
             > :nth-child(2) {
-                width: 18%;
+                width: 15%;
             }
 
             > :nth-child(3) {
@@ -50,7 +51,7 @@ export const Table = styled.table`
             }
 
             > :nth-child(4) {
-                width: 18%;
+                width: 15%;
             }
         }
     }
@@ -60,10 +61,6 @@ export const Table = styled.table`
             > td {
                 padding: 21px 24px;
                 border: 1px solid ${({ theme }) => theme.COLORS.GRAY_300};
-            }
-
-            > :first-child {
-                //
             }
         }
     }
@@ -76,7 +73,9 @@ export const StatusSelect = styled.select`
     padding: 8px 24px 8px ${px2vw(36)};
    
     background-color: ${({ theme }) => theme.COLORS.GRAY_900};
-    background-image: ${({ value }) => value == "Pendente" ? `url(${redDot})` : `url(${greenDot})`}, url(${arrowDownImg});
+    background-image: ${({ value }) => value == "Pendente" ? `url(${redDot})` : null}, url(${arrowDownImg});
+    background-image: ${({ value }) => value == "Preparando" ? `url(${yellowDot})` : null}, url(${arrowDownImg});
+    background-image: ${({ value }) => value == "Entregue" ? `url(${greenDot})` : null}, url(${arrowDownImg});
     background-position: 8%, 92%;
     background-size: 16px 16px;
     background-repeat: no-repeat, no-repeat;
