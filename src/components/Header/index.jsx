@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { useCart } from "../../hooks/cart";
 import { Container, SearchInput } from "./styles";
+import { Menu } from "../Menu";
 import { Logo } from "../Logo";
 import { Button } from "../Button";
 import searchImg from "../../assets/icons/search_img.svg";
@@ -30,7 +31,6 @@ export function Header({ setSearch }) {
     }
   }
 
-
   useEffect(() => {
     if (cart[0]) {
       let arrayItemsQuantity = [];
@@ -52,14 +52,6 @@ export function Header({ setSearch }) {
       <Link to={"/"}>
         <Logo />
       </Link>
-
-      { user.admin === 0 &&
-        <Link to={"/favorites"}>Meus favoritos</Link>
-      }
-
-      { user.admin === 1 &&
-        <Link to={"/orders-admin"}>Pedidos</Link>
-      }
 
       <SearchInput>
         <img src={searchImg} alt="lupa" />
@@ -86,9 +78,7 @@ export function Header({ setSearch }) {
           />
       }
 
-      <a href="/" onClick={handleSignOut}>
-        <img src={signOutImg} alt="" />
-      </a>
+      <Menu handleSignOut={ handleSignOut } />
 
 
     </Container>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import px2vw from "../../utils/px2vw";
 
 export const Container = styled.section`
-    width: ${px2vw(1122)};
+    width: 80%;
     display: flex;
     flex-direction: column;
     margin-bottom: 56px;
@@ -25,6 +25,30 @@ export const Container = styled.section`
         > button {
             z-index: 5;
             background-color: beige;
+        }
+    }
+
+    @media (max-width: 770px) {
+        > h2 {
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        > div {
+            height: 380px;
+            gap: 28px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        > h2 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        > div {
+            height: 210px;
+            gap: 28px;
         }
     }
 `;

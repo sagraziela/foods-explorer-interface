@@ -5,6 +5,7 @@ export const Container = styled.div`
     display: flex;
     height: fit-content;
     gap: ${(props) => props.className==='lg' ? '20px' : '12px'};
+    white-space: nowrap;
 
     > img {
         height: ${(props) => props.className==='lg' ? '49px' : '28px'};
@@ -19,23 +20,23 @@ export const Container = styled.div`
         gap: ${(props) => props.className==='lg' ? px2vw(16, 770) : px2vw(8, 770)};
 
         > img {
-            height: ${(props) => props.className==='lg' ? px2vw(40, 770) : px2vw(22, 770)};
+            height: ${(props) => props.className==='lg' ? px2vw(40, 770) : px2vw(20, 770)};
         }
 
         > h2 {
-            font-size: ${( props ) => props.className==='lg' ? px2vw(32, 770) : px2vw(20, 770)};
+            font-size: ${( props ) => props.className==='lg' ? px2vw(32, 770) : px2vw(18, 770)};
         }
     }
 
     @media (max-width: 430px) {
-        gap: ${(props) => props.className==='lg' ? px2vw(20, 430) : px2vw(12, 430)};
+        gap: ${(props) => props.className==='lg' ? px2vw(20, 430) : px2vw(8, 430)};
 
         > img {
-            height: ${(props) => props.className==='lg' ? px2vw(49, 430) : px2vw(29, 430)};
+            height: ${(props) => props.className==='lg' ? px2vw(49, 430) : px2vw(20, 430)};
         }
 
         > h2 {
-            font-size: ${( props ) => props.className==='lg' ? px2vw(42, 430) : px2vw(25, 430)};
+            font-size: ${( props ) => props.className==='lg' ? px2vw(42, 430) : px2vw(18, 430)};
         }
     }
     

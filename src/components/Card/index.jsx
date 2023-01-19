@@ -24,18 +24,19 @@ export function Card({ id, title, description, picture, price, isFav }) {
     const navigate = useNavigate();
 
     async function handleAddToFavorites() {
-
         const userFavs = await api.get(`/favorites/${user.id}`);
 
         const favAlreadyExists = userFavs.data.find(fav => fav.fav_food === food.title);
 
-        console.log(favAlreadyExists)
-
         if (favAlreadyExists) {
-            return await api.delete(`/favorites/${favAlreadyExists.id}`);
+            await api.delete(`/favorites/${favAlreadyExists.id}`);
+            return alert(`"${favAlreadyExists.fav_food}" foi removido dos seus favoritos.`);
+
         } else {
             try {
-                await api.post(`/favorites/${user.id}`, { fav_food: food.title, user_id: user.id})
+                await api.post(`/favorites/${user.id}`, { fav_food: food.title, user_id: user.id});
+
+                alert(`"${food.title}" foi adicionado aos seus favoritos.`);
                 
             } catch (error) {
                 return error.response ? error.response.data.message : "Não foi possível adicionar este prato aos seus favoritos."

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import px2vw from "../../utils/px2vw";
 
 export const Container = styled.div`
-    width: 530px;
+    width: ${px2vw(530)};
     display: flex;
     flex-direction: column;
     border: 1px solid ${({ theme }) => theme.COLORS.GRAY_300};
@@ -59,5 +59,28 @@ export const Container = styled.div`
 
     .hide {
         display: none;
+    }
+
+    @media (max-width: 770px) {
+        > :first-child {
+            height: 64px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        width: 360px;
+
+        > :first-child {
+            height: 48px;
+
+            > button {
+                font-size: 12px;
+
+                > img {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
     }
 `;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Content, Heading } from "./styles";
+import { Container, Content } from "./styles";
 import { useAuth } from "../../hooks/auth";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";

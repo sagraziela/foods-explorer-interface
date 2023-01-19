@@ -8,7 +8,7 @@ export const Container = styled.button`
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    opacity: ${({ theme, grayBg }) => grayBg ? 0.8 : 1 };
+    opacity: ${({ grayBg }) => grayBg ? 0.8 : 1 };
 
     display: flex;
     align-items: center;
@@ -27,16 +27,21 @@ export const Container = styled.button`
     }
 
     :hover {
-        filter: ${({ theme, grayBg }) => grayBg ? 'brightness(.8)' : 'brightness(1.2)' };
+        filter: ${({ grayBg }) => grayBg ? 'brightness(.8)' : 'brightness(1.2)' };
     }
 
     @media (max-width: 770px) {
-        height: 40px;
-        font-size: 14px;
+        height: 36px;
+        font-size: 12px;
 
         > img {
             width: 22px;
             height: 18px;
         }
+    }
+
+    @media (max-width: 430px) {
+        height: 32px;
+        font-size: 8px;
     }
 `;

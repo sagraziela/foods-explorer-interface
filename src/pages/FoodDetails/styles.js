@@ -45,10 +45,12 @@ export const Container = styled.div`
         bottom: 0;
     }
 
+    @media (max-width: 770px) {
+        grid-template-rows: 82px auto 64px;
+    }
+
     @media (max-width: 430px) {
-        grid-template-rows: 60px auto;
-        grid-template-areas: "back"
-        "content";
+        grid-template-rows: 60px 60px auto 48px;
 
         > a { 
             font-size: 16px;

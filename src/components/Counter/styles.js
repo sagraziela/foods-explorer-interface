@@ -14,4 +14,15 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.COLORS.BLUE_200};
         cursor: pointer;       
     }
+
+    @media (max-width: 770px) {
+        gap: 12px;
+
+        > button {
+            > img {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
 `;

@@ -123,7 +123,11 @@ export function Home() {
                                     price={food.price}
                                     /> 
                                 ))
-                        }                
+                        }
+
+                        { !foods[0] &&
+                            <p>Não foi encontrado nenhum prato com o parâmetro pesquisado.</p>
+                        }           
                     </Section>
                 </Content>
             }

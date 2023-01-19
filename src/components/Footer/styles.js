@@ -25,9 +25,18 @@ export const Container = styled.footer`
         font-size: 14px;
     }
 
-    @media (max-width: 550px) {
-        display: none;
-        height: 0;
+    @media (max-width: 770px) {
+        height: 64px;
+        padding: 16px auto;
+    }
+
+    @media (max-width: 430px) {
+        height: 48px;
+        padding: 8px 12px;
+
+        > p {
+            font-size: 8px;
+        }
     }
 
 `;

@@ -46,6 +46,44 @@ export const Container = styled.div`
         width: 200px;
         height: 200px;
     }
+
+    @media (max-width: 770px) {
+        min-width: 240px;
+        min-height: 370px;
+        padding: 32px 24px;
+        margin-right: 28px;
+
+        > button {
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+        }
+
+        > img {
+            width: 150px;
+            height: 150px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        min-width: 130px;
+        min-height: 200px;
+        padding: 24px 16px;
+        margin-right: 16px;
+
+        > button {
+            top: 12px;
+            right: 12px;
+            width: 16px;
+            height: 16px;
+        }
+
+        > img {
+            width: 80px;
+            height: 80px;
+        }
+    }
 `;
 
 export const FoodDescription = styled.div`
@@ -78,6 +116,36 @@ export const FoodDescription = styled.div`
         text-align: center;
         color: ${({ theme }) => theme.COLORS.GRAY_200};
     }
+
+    @media (max-width: 770px) {
+        margin: 0 auto 12px;
+
+        > a {
+            > h1 {
+                font-size: 18px;
+                line-height: 24px;
+            }
+        }
+
+        > p {
+            font-size: 12px;
+            line-height: 14px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        > a {
+            > h1 {
+                font-size: 14px;
+                line-height: 18px;
+                text-align: center;
+            }
+        }
+
+        > p {
+            display: none;
+        }
+    }
 `;
 
 export const PriceAndQuantitySection = styled.div`
@@ -92,8 +160,28 @@ export const PriceAndQuantitySection = styled.div`
         gap: 24px;
 
         > button {
-        margin: auto;
-        width: 92px;
+            margin: auto;
+            width: 92px;
+        }
+    }
+
+    @media (max-width: 770px) {
+        gap: 12px;
+
+        > div {
+            gap: 16px;
+
+            > button {
+                width: 70px;
+                font-size: 12px;
+                gap: 4px;
+            }
+        }
+    }
+
+    @media (max-width: 430px) {
+        > div {
+            display: none;
         }
     }
 `;
@@ -103,4 +191,12 @@ export const Price = styled.p`
     width: fit-content;
     color: ${({ theme }) => theme.COLORS.BLUE_200};
     display: flex;
+
+    @media (max-width: 770px) {
+        font-size: 24px;
+    }
+
+    @media (max-width: 430px) {
+        font-size: 16px;
+    }
 `;

@@ -8,23 +8,32 @@ export const Container = styled.div`
     "content"
     "footer";
 
+    @media (max-width: 770px) {
+        grid-template-rows: 82px auto 64px;
+    }
+    @media (max-width: 430px) {
+        grid-template-rows: 60px auto 48px;
+    }
+
 `;
 
 export const Content = styled.div`
     grid-area: content;
-    padding: 32px 123px 98px;
+    padding: 32px ${px2vw(123)};
 
-    > img {
-        margin: 30px auto 48px;
+    @media (max-width: 770px) {
+        > section {
+            margin: 0 0 32px;
+        }
     }
 `;
 
 export const Heading = styled.div`
-    width: ${px2vw(1120)};
+    width: 100%;
     height: ${px2vw(260)};
     background-color: ${({ theme }) => theme.COLORS.GRAY_700};
     position: relative;
-    margin: ${px2vw(150)} auto 64px;
+    margin: ${px2vw(160)} 0 64px;
     border-radius: 8px;
 
     display: grid;
@@ -37,7 +46,7 @@ export const Heading = styled.div`
         width: ${px2vw(632)};
         height: ${px2vw(406)};
         bottom: 0px;
-        left: ${px2vw(-56)};
+        left: ${px2vw(-58)};
     }
 
     > div {
@@ -56,6 +65,27 @@ export const Heading = styled.div`
         > p {
             font-size: ${px2vw(16)};
             line-height: ${px2vw(30)};
+        }
+    }
+
+    @media (max-width: 430px) {
+        height: ${px2vw(120, 430)};
+
+        > img {
+            width: ${px2vw(200, 430)};
+            height: ${px2vw(140, 430)};
+        }
+
+        > div {
+            > h2 {
+                font-size: 16px;
+                line-height: 20px;
+            }
+
+            > p {
+                font-size: 8px;
+                line-height: 12px;
+            }
         }
     }
 `;

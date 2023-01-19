@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px ${px2vw(120)};
+  padding: 24px 0 24px ${px2vw(120)};
 
   width: 100%;
   height: 104px;
@@ -42,7 +42,7 @@ export const Container = styled.div`
     gap: ${px2vw(8)};
 
     width: ${px2vw(216)};
-    min-width: 160px;
+    min-width: 140px;
     height: 52px;
 
     > img {
@@ -52,18 +52,33 @@ export const Container = styled.div`
   }
 
   @media (max-width: 770px) {
-    > a {
-      display: none;
-      width: 0;
-    }
+    height: 82px;
 
     > button {
-      padding: 12px;
+      width: 140px;
+      padding: 8px;
     }
   }
 
   @media (max-width: 430px) {
-    display: none;
+    padding: 14px;
+    height: 60px;
+
+    > button {
+      position: fixed;
+      z-index: 1;
+      bottom: 12px;
+      right: 12px;
+      min-width: 56px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      padding: 8px;
+
+      > img {
+        display: none;
+      }
+    }
   }
 `;
 
@@ -99,109 +114,24 @@ export const SearchInput = styled.div`
       color: ${({ theme }) => theme.COLORS.GRAY_300};
     }
   }
-`;
-
-/*
-export const Menu = styled.section`
-  display: none;
-  width: 0px;
 
   @media (max-width: 770px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        position: relative;
+    padding: 4px 8px;
+    width: 180px;
+    height: 36px;
+  }
 
-        cursor: pointer;
-        transition: 0.5s ease-in-out;
-      
-        > div {
-          width: 100%;
-          height: 2px;
-          background-color: ${({ theme }) => theme.COLORS.GRAY_100};
-          border-radius: 4px;
-          position: absolute;
-          transition: 0.5s ease-in-out;
-        }
+  @media (max-width: 430px) {
+    padding: 4px 8px;
+    width: 120px;
 
-        > :nth-child(1) {
-          top: 10px;
-          transform: rotate(0);
-        }
-
-        > :nth-child(2) {
-            top: 20px;
-            transform: rotate(0);
-        }
-
-        > :nth-child(3) {
-            top: 30px;
-            transform: rotate(0);
-        }
+    > img {
+      height: 16px;
+      width: 16px;
     }
 
-    > ul {
-      display: none;
-      transition: 0.5s ease-in-out;
+    > input {
+      font-size: 12px;
     }
-
-    :hover {
-      height: 216px;
-      width: 130px;
-      margin-top: 160px;
-      background-color: ${({ theme }) => theme.COLORS.GRAY_500};
-      border-radius: 8px;
-      gap: 24px;
-
-      z-index: 1;
-
-      > div {
-        > :nth-child(1) {
-        transform: rotate(45deg);
-        top: 20px;
-        }
-
-        > :nth-child(2) {
-          transform: translateX(40px);
-          width: 30px;
-          visibility: hidden;
-          opacity: 0;
-        }
-
-        > :nth-child(3) {
-          transform: rotate(-45deg);
-          top: 20px;
-        }
-      }
-
-      > ul {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-
-        > li {
-          list-style: none;
-
-          > a {
-            text-decoration: none;
-            color: ${({ theme }) => theme.COLORS.GRAY_100};
-
-            :hover {
-              color: ${({ theme }) => theme.COLORS.BLUE_200};
-            }
-          }
-        }
-      }
-    }
-  } 
-`; */
+  }
+`;

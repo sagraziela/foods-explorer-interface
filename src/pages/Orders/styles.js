@@ -24,6 +24,14 @@ export const Container = styled.div`
             margin-bottom: 32px;
         }
     }
+
+    @media (max-width: 770px) {
+        grid-template-rows: 82px auto 64px;
+    }
+    @media (max-width: 430px) {
+        grid-template-rows: 60px auto 48px;
+    }
+
 `;
 
 export const Table = styled.table`

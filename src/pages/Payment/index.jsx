@@ -65,9 +65,13 @@ export function Payment() {
                 <section>
                     <h2>Meu pedido</h2>
 
-                    <ul>
-                        { cart[0] && 
-                            cart.map(item => (
+                    { !cart[0] &&
+                        <span>Seu carrinho ainda está vazio.</span>
+                    }
+
+                    { cart[0] &&
+                        <ul>
+                            {cart.map(item => (
                                 <ItemRequest key={item.id}>
                                     <img 
                                     src={item.picture ? item.picture : placeholderImg} 
@@ -85,9 +89,9 @@ export function Payment() {
                                         </button>
                                     </div>
                                 </ItemRequest>
-                            ))
-                        }
-                    </ul>
+                            ))}
+                        </ul>
+                    }
 
                     {cart[0] && 
                         <p> {`Total: R$ ${totalPrice}`} </p>

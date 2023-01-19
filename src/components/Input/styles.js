@@ -10,7 +10,7 @@ export const Container = styled.div`
     font-size: 16px;
 
     > input {
-        height: 48px;
+        height: 100%;
         background-color: transparent;
         padding: ${px2vw(16)};;
         border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
@@ -31,11 +31,11 @@ export const Container = styled.div`
     }
 
     @media (max-width: 770px) {
-        height: ${px2vw(76, 770)};
+        height: 36px;
         font-size: ${px2vw(16, 770)};
 
         > input {
-            height: ${px2vw(48, 770)};
+            height: 100%;
             padding: ${px2vw(16, 770)};;
             font-size: ${px2vw(16, 770)};
             border-radius: ${px2vw(6, 770)};
