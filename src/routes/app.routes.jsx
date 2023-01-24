@@ -15,7 +15,7 @@ export function AppRoutes() {
             <Routes>
                 <Route path="/" element={ <Home /> } />
                 <Route path="/food-details/:id" element={ <FoodDetails /> } />
-                <Route path="/orders" element={ <Orders /> } />
+                <Route path="/orders" element={ <ProtectedRoute Page={ Orders } />  } />
                 <Route path="/orders/:id" element={ <Orders /> } />
                 <Route path="/new-food" element={ <ProtectedRoute Page={ NewFood } /> } />
                 <Route path="/edit-food/:id" element={ <ProtectedRoute Page={ EditFood } /> } />

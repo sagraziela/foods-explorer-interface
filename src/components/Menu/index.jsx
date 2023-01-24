@@ -23,14 +23,18 @@ export function Menu({ handleSignOut }) {
                     <Link to={"#"}>Dados do restaurante</Link>
                     }
                 </li>
-                { user.admin === 1 &&
-                    <li>
-                    <Link to={"/new-food"}>Novo prato</Link>
-                    </li>
-                }
                 <li>
                     { user.admin === 0 &&
-                    <Link to={"/favorites"}>Meus favoritos</Link>
+                        <Link to={"/favorites"}>Meus favoritos</Link>
+                    }
+
+                    { user.admin === 1 &&
+                        <Link to={"/new-food"}>Novo prato</Link>    
+                    }
+                </li>
+                <li>
+                    { user.admin === 0 &&
+                    <Link to={`/orders/${user.id}`}>Histórico</Link>
                     }
 
                     { user.admin === 1 &&

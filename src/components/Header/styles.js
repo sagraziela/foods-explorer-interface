@@ -8,9 +8,10 @@ export const Container = styled.header`
   align-items: center;
   padding: 24px 0 24px ${px2vw(120)};
 
-  width: 100%;
+  width: 100vw;
   height: 104px;
   background: ${({ theme }) => theme.COLORS.GRAY_700};
+  position: relative;
 
   > div {
     display: flex;
@@ -51,6 +52,17 @@ export const Container = styled.header`
     }
   }
 
+  > .menuArea {
+    width: ${px2vw(180)};
+    height: 40px;
+    margin-right: 8px;
+  }
+
+  > :last-child {
+    position: absolute;
+    right: 8px;
+  }
+
   @media (max-width: 770px) {
     height: 82px;
 
@@ -78,6 +90,10 @@ export const Container = styled.header`
       > img {
         display: none;
       }
+    }
+
+    > .menuArea {
+      width: 30px;
     }
   }
 `;

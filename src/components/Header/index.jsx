@@ -71,9 +71,11 @@ export function Header({ setSearch }) {
       { user.admin === 1 &&
           <Button
           title="Pedidos"
-          onClick={() => navigate(`/orders/${user.id}`)}
+          onClick={() => navigate(`/orders`)}
           />
       }
+
+      <div className="menuArea"></div>
 
       <Menu handleSignOut={ handleSignOut } />
 

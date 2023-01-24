@@ -4,8 +4,9 @@ import px2vw from "../../utils/px2vw";
 export const Container = styled.section`
     width: ${px2vw(180)};
     display: flex;
-    justify-items: left;
+    justify-content: center;
     margin-right: 8px;
+    padding-right: 8px;
     position: relative;
     
     > div {
@@ -82,18 +83,21 @@ export const Container = styled.section`
       }
 
       > ul {
-        position: absolute;
-        top: 60px;
-        width: ${px2vw(180)};
         display: flex;
         flex-direction: column;
         opacity: 1;
+        position: absolute;
+        top: 60px;
+        right: 0px;
+        width: ${px2vw(180)};
         gap: 16px;
         text-align: right;
 
         background-color: ${({ theme }) => theme.COLORS.GRAY_500};
         border-radius: 0 0 8px 8px;
         padding: 8px;
+
+        transform: translateY(50);
 
         > li {
           list-style: none;
@@ -129,19 +133,22 @@ export const Container = styled.section`
     }
 
     @media (max-width: 430px) {
-        width: 40px;
+      width: 40px;
+      justify-content: right;
 
         > div {
             width: 24px;
         }
 
         :hover {
-            width: 110px;
+            width: 100px;
             height: 50px;
+            position: absolute;
             
             > ul {
-                width: 110px;
+                width: 100px;
                 top: 50px;
+                right: 0;
                 justify-items: right;
 
                 > li {
