@@ -109,23 +109,25 @@ export const Content = styled.main`
     }
 
     @media (max-width: 430px) {
-        width: 350px;
+        max-width: 350px;
         margin: 14px auto 48px;
         justify-content: center;
 
         > div {
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: left;
             gap: 24px;
 
             > img {
-                width: 280px;
-                height: 280px;
+                width: 180px;
+                height: 180px;
             }
 
             > section {
                 width: 100%;
+                justify-content: center;
+                gap: 12px;
             }
         }
     }
@@ -167,17 +169,18 @@ export const List = styled.ul`
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
+    padding: 0;
     gap: ${px2vw(24)};
     list-style: none;
 
     @media (max-width: 430px) {
         position: absolute;
-        top: 0;
+        top: 60px;
         right: 0;
-        gap: 16px;
+        gap: 12px;
         flex-direction: column;
         align-items: center;
-        padding: 16px 8px;
+        padding: 4px 4px;
         border-radius: 8px;
         background-color: ${({ theme }) => theme.COLORS.BLACK_TRANSPARENT};
     }
@@ -211,4 +214,8 @@ export const Price = styled.p`
     white-space: nowrap;
     color: ${({ theme }) => theme.COLORS.BLUE_200};
     display: flex;
+
+    @media (max-width: 430px) {
+        font-size: 24px;
+    }
 `;

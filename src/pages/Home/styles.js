@@ -26,6 +26,12 @@ export const Content = styled.div`
             margin: 0 0 32px;
         }
     }
+
+    @media (max-width: 430px) {
+        > section {
+            margin: 0 0 16px;
+        }
+    }
 `;
 
 export const Heading = styled.div`
@@ -70,6 +76,7 @@ export const Heading = styled.div`
 
     @media (max-width: 430px) {
         height: ${px2vw(120, 430)};
+        margin: ${px2vw(16)} 0 32px 0;
 
         > img {
             width: ${px2vw(200, 430)};
@@ -77,13 +84,14 @@ export const Heading = styled.div`
         }
 
         > div {
+            width: ${px2vw(170, 430)};
             > h2 {
                 font-size: 16px;
                 line-height: 20px;
             }
 
             > p {
-                font-size: 8px;
+                font-size: 7px;
                 line-height: 12px;
             }
         }

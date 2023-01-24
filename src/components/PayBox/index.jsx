@@ -11,8 +11,14 @@ export function PayBox({ onClick }) {
 
     const [payData, setPayData] = useState({});
 
-    function changePayMethod(e) {
-        console.log(e.target)
+    const [payMethod, setPayMethod] = useState({qrCode: "qrCode hide", creditCard: "creditCard"});
+
+    function handleTogglePayMethod() {
+        if (payMethod.qrCode === "qrCode hide") {
+            setPayMethod({qrCode: "qrCode", creditCard: "creditCard hide"});
+        } else {
+            setPayMethod({qrCode: "qrCode hide", creditCard: "creditCard"});
+        }
     }
 
     function handleChange(e) {
@@ -23,25 +29,30 @@ export function PayBox({ onClick }) {
         <Container>
             <div>
                 <button
-                onClick={changePayMethod}
+                onClick={handleTogglePayMethod}
                 >
                     <img src={pixIcon} alt="Ícone PIX" />
                     PIX
                 </button>
 
                 <button
-                onClick={changePayMethod}
+                name="creditCardBtn"
+                onClick={handleTogglePayMethod}
                 >
                     <img src={cardIcon} alt="Ícone cartão" />
                     Crédito
                 </button>
             </div>
 
-            <div className="qrCode hide">
+            <div 
+            className={payMethod.qrCode}
+            >
                 <img src={qrcode} alt="qrcode" />
             </div>
 
-            <div className="creditCard">
+            <div 
+            className={payMethod.creditCard}
+            >
                 <Input
                 type="number"
                 label="Número do cartão"

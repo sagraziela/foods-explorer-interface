@@ -53,6 +53,12 @@ export const Container = styled.div`
             }
         }
     }
+
+    @media (max-width: 430px) {
+        > input {
+            font-size: 14px;
+        }
+    }
 `;
 
 export const ImageUpload = styled.label`
@@ -81,5 +87,12 @@ export const ImageUpload = styled.label`
 
     :hover {
         filter: brightness(.8);
+    }
+
+    @media (max-width: 430px) {
+        max-width: 150px;
+        font-size: 14px;
+        overflow: hidden;
+        justify-content: left;
     }
 `;

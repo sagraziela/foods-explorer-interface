@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import px2vw from "../../utils/px2vw";
 
-export const Container = styled.div`
+export const Container = styled.header`
   grid-area: header;
   display: flex;
   justify-content: space-between;
@@ -123,7 +123,7 @@ export const SearchInput = styled.div`
 
   @media (max-width: 430px) {
     padding: 4px 8px;
-    width: 120px;
+    max-width: ${px2vw(180, 430)};
 
     > img {
       height: 16px;

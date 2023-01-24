@@ -23,9 +23,9 @@ export function Menu({ handleSignOut }) {
                     <Link to={"#"}>Dados do restaurante</Link>
                     }
                 </li>
-                { user.admin === 0 &&
+                { user.admin === 1 &&
                     <li>
-                    <Link to={`/orders/${user.id}`}>Meus pedidos</Link>
+                    <Link to={"/new-food"}>Novo prato</Link>
                     </li>
                 }
                 <li>

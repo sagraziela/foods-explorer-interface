@@ -42,6 +42,6 @@ export const Container = styled.button`
 
     @media (max-width: 430px) {
         height: 32px;
-        font-size: 8px;
+        font-size: 10px;
     }
 `;

@@ -28,14 +28,29 @@ export const Container = styled.div`
     @media (max-width: 770px) {
         grid-template-rows: 82px auto 64px;
     }
+
     @media (max-width: 430px) {
         grid-template-rows: 60px auto 48px;
-    }
 
+        > header {
+            > button {
+                display: none;
+            }
+        }
+
+        > main {
+            margin-top: 24px;
+            > h1 {
+                font-size: 24px;
+                margin-bottom: 16px;
+            }
+        }
+    }
 `;
 
 export const Table = styled.table`
     width: 100%;
+    height: fit-content;
     border-collapse: collapse;
 
     > thead {
@@ -47,7 +62,7 @@ export const Table = styled.table`
             }
 
             > :nth-child(1) {
-                width: 15%;
+                width: 25%;
             }
 
             > :nth-child(2) {
@@ -59,7 +74,7 @@ export const Table = styled.table`
             }
 
             > :nth-child(4) {
-                width: 15%;
+                width: 18%;
             }
         }
     }
@@ -72,19 +87,47 @@ export const Table = styled.table`
             }
         }
     }
+
+    @media (max-width: 770px) {
+        > thead {
+            > tr {
+                > th {
+                    padding: 12px 14px;
+                }
+            }
+        }
+
+        > tbody {
+            > tr {
+                > td {
+                    padding: 8px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 430px) {
+        > thead {
+            > tr {
+                > th {
+                    padding: 8px;
+                }
+            }
+        }
+    }
 `;
 
 export const StatusSelect = styled.select`
     width: 100%;
     height: 48px;
     display: inline-block;
-    padding: 8px 24px 8px ${px2vw(36)};
+    padding: 8px 24px 8px ${px2vw(40)};
    
     background-color: ${({ theme }) => theme.COLORS.GRAY_900};
     background-image: ${({ value }) => value == "Pendente" ? `url(${redDot})` : null}, url(${arrowDownImg});
     background-image: ${({ value }) => value == "Preparando" ? `url(${yellowDot})` : null}, url(${arrowDownImg});
     background-image: ${({ value }) => value == "Entregue" ? `url(${greenDot})` : null}, url(${arrowDownImg});
-    background-position: 8%, 92%;
+    background-position: 8%, 85%;
     background-size: 16px 16px;
     background-repeat: no-repeat, no-repeat;
     color: ${({ theme }) => theme.COLORS.GRAY_100};
@@ -96,5 +139,14 @@ export const StatusSelect = styled.select`
     
     :focus {
         outline: 1px solid ${({ theme }) => theme.COLORS.BLUE_200};
+    }
+
+    @media (max-width: 770px) {
+        padding: 8px 24px 8px 30px;
+    }
+
+    @media (max-width: 430px) {
+        padding-right: ${px2vw(48, 430)};
+        background-position: 25%, 85%;
     }
 `;

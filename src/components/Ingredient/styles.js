@@ -33,13 +33,12 @@ export const Container = styled.li`
 
     @media (max-width: 430px) {
         > img {
-            height: 40px;
-            width: 40px;
+            height: 32px;
+            width: 32px;
         }
 
         > p {
-            font-family: "Poppins", sans-serif;
-            font-size: 14px;
+            font-size: 12px;
         }
     }
 `;

@@ -34,6 +34,11 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        > img {
+            height: ${px2vw(250)};
+            width: ${px2vw(250)};
+        }
     }
 
     > .creditCard {
@@ -65,10 +70,24 @@ export const Container = styled.div`
         > :first-child {
             height: 64px;
         }
+
+        > .qrCode {
+            height: 250px;
+
+            > img {
+                height: 190px;
+                width: 190px;
+            }
+        }
+
+        > .creditCard {
+            height: 260px;
+            justify-content: space-evenly;
+        }
     }
 
     @media (max-width: 430px) {
-        width: 360px;
+        width: 270px;
 
         > :first-child {
             height: 48px;
@@ -81,6 +100,19 @@ export const Container = styled.div`
                     height: 14px;
                 }
             }
+        }
+
+        > .qrCode {
+            height: 150px;
+
+            > img {
+                height: 130px;
+                width: 130px;
+            }
+        }
+
+        > .creditCard {
+            gap: 12px;
         }
     }
 `;

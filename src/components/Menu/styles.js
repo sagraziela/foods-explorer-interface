@@ -112,7 +112,6 @@ export const Container = styled.section`
     }
 
     @media (max-width: 770px) {
-
         > div {
             width: 32px;
         }
@@ -131,9 +130,6 @@ export const Container = styled.section`
 
     @media (max-width: 430px) {
         width: 40px;
-        margin-right: 0;
-        justify-items: right;
-        text-align: right;
 
         > div {
             width: 24px;

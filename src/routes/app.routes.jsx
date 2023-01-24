@@ -7,6 +7,7 @@ import { NewFood } from "../pages/NewFood";
 import { EditFood } from "../pages/EditFood";
 import { Payment } from "../pages/Payment";
 import { Favorites } from "../pages/Favorites";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
 export function AppRoutes() {
     return (
@@ -16,8 +17,8 @@ export function AppRoutes() {
                 <Route path="/food-details/:id" element={ <FoodDetails /> } />
                 <Route path="/orders" element={ <Orders /> } />
                 <Route path="/orders/:id" element={ <Orders /> } />
-                <Route path="/new-food" element={ <NewFood /> } />
-                <Route path="/edit-food/:id" element={ <EditFood /> } />
+                <Route path="/new-food" element={ <ProtectedRoute Page={ NewFood } /> } />
+                <Route path="/edit-food/:id" element={ <ProtectedRoute Page={ EditFood } /> } />
                 <Route path="/payment" element={ <Payment /> } />
                 <Route path="/favorites" element={ <Favorites /> } />
             </Routes>

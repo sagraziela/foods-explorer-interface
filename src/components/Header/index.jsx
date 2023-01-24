@@ -7,8 +7,6 @@ import { Logo } from "../Logo";
 import { Button } from "../Button";
 import searchImg from "../../assets/icons/search_img.svg";
 import receiptImg from "../../assets/icons/receipt.svg"
-import plusIcon from "../../assets/icons/plus.svg"
-import signOutImg from "../../assets/icons/sign_out_symbol.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -72,14 +70,12 @@ export function Header({ setSearch }) {
 
       { user.admin === 1 &&
           <Button
-          icon={plusIcon}
-          title="Adicionar prato"
-          onClick={() => navigate("/new-food")}
+          title="Pedidos"
+          onClick={() => navigate(`/orders/${user.id}`)}
           />
       }
 
       <Menu handleSignOut={ handleSignOut } />
-
 
     </Container>
   )

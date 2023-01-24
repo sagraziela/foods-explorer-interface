@@ -3,11 +3,12 @@ import px2vw from "../../utils/px2vw";
 
 export const Container = styled.div`
     width: 100%;
-    height: 76px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-size: 16px;
+    gap: 8px;
 
     > input {
         height: 100%;
@@ -25,34 +26,26 @@ export const Container = styled.div`
         }
 
         ::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+            -webkit-appearance: none;
+            margin: 0;
         }
     }
 
     @media (max-width: 770px) {
-        height: 36px;
-        font-size: ${px2vw(16, 770)};
+        font-size: 14px;
 
         > input {
-            height: 100%;
-            padding: ${px2vw(16, 770)};;
-            font-size: ${px2vw(16, 770)};
-            border-radius: ${px2vw(6, 770)};
+            padding: ${px2vw(16, 770)};
+            font-size: 14px;
+            border-radius: 6px;
 
         }
     }
 
     @media (max-width: 430px) {
-        height: ${px2vw(76, 500)};
-        font-size: ${px2vw(16, 500)};
-
         > input {
-            height: ${px2vw(48, 500)};
-            padding: ${px2vw(16, 500)};;
-            font-size: ${px2vw(16, 500)};
-            border-radius: ${px2vw(6, 500)};
-
+            padding: ${px2vw(16, 430)};
+            border-radius: 6px;
         }
     }
 `;

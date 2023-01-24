@@ -57,14 +57,7 @@ export function EditFood() {
     }
 
     async function handleAddNewIngredientsToDB(newItems) {
-        console.log(newItems)
         const newIngredients = await api.post(`/ingredients/${food.id}`, { ingredients: newItems });
-        console.log(newIngredients)
-
-        /*await pictureUpload({ 
-            ingredient: newIngredients[0], 
-            imageFile: item.file 
-        });*/
 
         newIngredients.data.map( async createdIngr => {
             const matchedIngredient = food.ingredients.find(ingredient => createdIngr.name === ingredient.name);

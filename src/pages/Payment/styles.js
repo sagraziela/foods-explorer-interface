@@ -124,4 +124,21 @@ export const ItemRequest = styled.li`
             }
         }
     }
+
+    @media (max-width: 430px) {
+
+        > div {
+            > p {
+                font-size: 14px;
+                
+                > span {
+                    font-size: 10px;
+                }
+            }
+
+            > button {
+                font-size: 10px;
+            }
+        }
+    }
 `;

@@ -33,8 +33,20 @@ export const Container = styled.div`
 
     @media (max-width: 430px) {
         grid-template-rows: 60px auto 48px;
-    }
 
+        > main {
+            margin-top: 24px;
+            
+            > a {
+                font-size: 12px;
+
+                > img {
+                    height: 14px;
+                    width: 14px;
+                }
+            }
+        }
+    }
 `;
 
 export const Form = styled.form`
@@ -56,21 +68,21 @@ export const Form = styled.form`
             flex-direction: column;
             justify-content: space-between;
             font-size: 16px;
+            gap: 8px;
         }
     }
 
     .sectionThree {
         > :first-child {
             width: 100%;
-            height: 76px;
+            height: fit-content;
             display: flex;
             flex-direction: column;
             gap: 8px;
 
             > select {
                 width: 100%;
-                height: 48px;
-                padding: 0 12px;
+                padding: ${px2vw(16)};
                 border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
                 border-radius: 8px;
                 background-color: ${({ theme }) => theme.COLORS.GRAY_900};
@@ -94,6 +106,38 @@ export const Form = styled.form`
         width: 357px;
         align-self: flex-end;
     }
+
+    @media (max-width: 430px) {
+        gap: 14px;
+
+        > h1 {
+            font-size: 20px;
+        }
+
+        > .sectionOne {
+            flex-direction: column-reverse;
+            gap: 16px;
+        }
+
+        > .sectionThree {
+            > :first-child {
+                > select {
+                    padding: ${px2vw(16, 430)};
+                    font-size: 14px;
+                    line-height: 14px;
+                }
+            }
+
+            > :last-child {
+                width: 130px;
+            }
+        }
+
+        > button {
+        width: 180px;
+        align-self: flex-end;
+    }
+    }
 `;
 
 export const ImageUpload = styled.label`
@@ -116,6 +160,10 @@ export const ImageUpload = styled.label`
         height: 24px;
     }
 
+    > span {
+        overflow: hidden;
+    }
+
     > input {
         display: none;
     }    
@@ -126,7 +174,15 @@ export const ImageUpload = styled.label`
 
     @media (max-width: 770px) {
         width: ${px2vw(200, 770)};
-        font-size: ${px2vw(16, 770)};
+
+        > img {
+            width: 18px;
+            height: 18px;
+        }
+
+        > span {
+            font-size: 14px;
+        }
 
         > input {
             height: ${px2vw(48, 770)};
@@ -136,8 +192,19 @@ export const ImageUpload = styled.label`
     }
 
     @media (max-width: 430px) {
-        height: ${px2vw(76, 500)};
-        font-size: ${px2vw(16, 500)};
+        height: 54px;
+        width: 170px;
+        white-space: nowrap;
+        overflow: hidden;
+
+        > img {
+            width: 14px;
+            height: 14px;
+        }
+
+        > span {
+            font-size: 12px;
+        }
 
         > input {
             height: ${px2vw(48, 500)};

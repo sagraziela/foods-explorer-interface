@@ -37,9 +37,7 @@ export function Orders() {
 
         fetchOrders()
     }, []);
-
-    console.log(orders)
-
+    
     return (
         <Container>
             <Header />

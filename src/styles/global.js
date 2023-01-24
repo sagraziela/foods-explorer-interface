@@ -19,5 +19,9 @@ export default createGlobalStyle`
 
     color: ${({ theme }) => theme.COLORS.GRAY_100};
     background-color: ${({ theme }) => theme.COLORS.GRAY_900};
+
+    @media (max-width: 770px) {
+      font-size: 14px;
+    }
   }
 `;

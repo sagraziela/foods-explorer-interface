@@ -47,7 +47,7 @@ export const Container = styled.section`
         }
 
         > div {
-            height: 210px;
+            height: 260px;
             gap: 28px;
         }
     }

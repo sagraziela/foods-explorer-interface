@@ -9,7 +9,6 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 24px;
     border-radius: 8px;
     position: relative;
 
@@ -68,9 +67,11 @@ export const Container = styled.div`
 
     @media (max-width: 430px) {
         min-width: 130px;
-        min-height: 200px;
-        padding: 24px 16px;
+        min-height: 180px;
+        height: 210px;
+        padding: 16px 8px;
         margin-right: 16px;
+        gap: 12px;
 
         > button {
             top: 12px;
@@ -92,10 +93,11 @@ export const FoodDescription = styled.div`
     gap: 8px;
     justify-content: center;
     align-items: center;
-    margin: 18px auto 16px;
+    margin: 12px auto;
 
     > a {
         text-decoration: none;
+        height: 48px;
         display: flex;
         
         > h1 {
@@ -135,6 +137,8 @@ export const FoodDescription = styled.div`
 
     @media (max-width: 430px) {
         > a {
+            height: 36px;
+            
             > h1 {
                 font-size: 14px;
                 line-height: 18px;
@@ -197,6 +201,6 @@ export const Price = styled.p`
     }
 
     @media (max-width: 430px) {
-        font-size: 16px;
+        font-size: 14px;
     }
 `;
