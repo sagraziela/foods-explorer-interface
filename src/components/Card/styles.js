@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    min-width: 300px;
-    min-height: 512px;
+    width: 300px;
+    height: 512px;
     padding: 32px 24px;
     margin-right: 28px;
     display: flex;
@@ -104,14 +104,17 @@ export const FoodDescription = styled.div`
         
         > h1 {
             font-family: 'Poppins', sans-serif;
+            font-weight: 700;
             font-size: 24px;
             line-height: 32px;
+            display: flex;
+            text-align: center;
+            white-space: nowrap;
             color: ${({ theme }) => theme.COLORS.GRAY_100};
         }
 
         :hover {
-            opacity: .9;
-            border-bottom: 2px solid ${({ theme }) => theme.COLORS.GRAY_100};
+            opacity: .8;
         }
     }
 

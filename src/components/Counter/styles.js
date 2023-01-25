@@ -8,6 +8,10 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
+    > p {
+        color: ${({ theme }) => theme.COLORS.WHITE};
+    }
+
     > button {
         background-color: transparent;
         border: none;

@@ -1,7 +1,7 @@
 import { Container } from "./styles";
 import arrowLeftImg from "../../assets/icons/arrow_left.svg";
 import arrowRightImg from "../../assets/icons/arrow_right.svg";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 export function Section({ title, children }) {
 
@@ -43,12 +43,13 @@ export function Section({ title, children }) {
             <h2>{title}</h2>
 
             <div className="wrapper">
-                <button
-                id="left"
-                onClick={e => handleScrollBtn(e)}
-                >
-                    <img src={arrowLeftImg} id="left" />
-                </button>
+                <div className="arrowBtn">
+                    <button
+                    onClick={e => handleScrollBtn(e)}
+                    >
+                        <img src={arrowLeftImg} id="left" />
+                    </button>
+                </div>
 
                 <div 
                 className="carousel"
@@ -60,12 +61,13 @@ export function Section({ title, children }) {
                     {children}
                 </div>
 
-                <button 
-                id="right"
-                onClick={e => handleScrollBtn(e)}
-                >
-                    <img src={arrowRightImg} id="right" />
-                </button>
+                <div className="arrowBtn">
+                    <button 
+                    onClick={e => handleScrollBtn(e)}
+                    >
+                        <img src={arrowRightImg} id="right" />
+                    </button>
+                </div>
             </div>
         </Container>
     )
