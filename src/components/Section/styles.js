@@ -14,17 +14,47 @@ export const Container = styled.section`
         font-weight: 500;
     }
 
-    > div {
-        width: 100%;
-        height: 515px;
-        display: flex;
-        gap: 28px;
+    > .wrapper {
+        max-width: 1200px;
         position: relative;
-        overflow: hidden;
 
         > button {
-            z-index: 5;
-            background-color: beige;
+            background: transparent;
+            border: none;
+            outline: none;
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            top: 50%;
+            cursor: pointer;
+
+            transform: translateY(-50%);
+
+            > img {
+                height: 24px;
+                width: 20px;
+            }
+
+            > :hover {
+                border: 1px solid ${({ theme }) => theme.COLORS.BLUE_200};
+                border-radius: 4px;
+            }
+        }
+
+        > :first-child {
+            left: -23px;
+        }
+
+        > :last-child {
+            right: -23px;
+        }
+
+        > .carousel {
+            font-size: 0;
+            overflow: hidden;
+            cursor: grab;
+            display: flex;
+            scroll-behavior: smooth;
         }
     }
 

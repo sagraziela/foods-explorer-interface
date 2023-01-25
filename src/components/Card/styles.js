@@ -13,6 +13,7 @@ export const Container = styled.div`
     position: relative;
 
     background-color: ${({ theme }) => theme.COLORS.BLACK_TRANSPARENT};
+    user-select: none;
 
     > button {
         position: absolute;
@@ -97,8 +98,9 @@ export const FoodDescription = styled.div`
 
     > a {
         text-decoration: none;
-        height: 48px;
+        height: 36px;
         display: flex;
+        margin: 12px auto;
         
         > h1 {
             font-family: 'Poppins', sans-serif;
@@ -109,6 +111,7 @@ export const FoodDescription = styled.div`
 
         :hover {
             opacity: .9;
+            border-bottom: 2px solid ${({ theme }) => theme.COLORS.GRAY_100};
         }
     }
 
@@ -116,6 +119,7 @@ export const FoodDescription = styled.div`
         font-size: 14px;
         line-height: 18px;
         text-align: center;
+        padding: auto 12px;
         color: ${({ theme }) => theme.COLORS.GRAY_200};
     }
 

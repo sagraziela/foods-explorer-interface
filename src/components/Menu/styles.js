@@ -87,7 +87,7 @@ export const Container = styled.section`
         flex-direction: column;
         opacity: 1;
         position: absolute;
-        top: 60px;
+        top: 58px;
         right: 0px;
         width: ${px2vw(180)};
         gap: 16px;
@@ -96,8 +96,6 @@ export const Container = styled.section`
         background-color: ${({ theme }) => theme.COLORS.GRAY_500};
         border-radius: 0 0 8px 8px;
         padding: 8px;
-
-        transform: translateY(50);
 
         > li {
           list-style: none;
