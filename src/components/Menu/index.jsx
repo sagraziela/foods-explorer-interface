@@ -41,6 +41,13 @@ export function Menu({ handleSignOut }) {
                     <Link to={"/orders"}>Pedidos</Link>
                     }
                 </li>
+
+                { user.admin === 1 &&
+                    <li>
+                        <Link to={"/new-admin"}>Criar Admin</Link>    
+                    </li>
+                }
+                
                 <li>
                     <a href="/" onClick={handleSignOut}>
                     Sair
