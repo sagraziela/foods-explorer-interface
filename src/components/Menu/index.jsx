@@ -20,7 +20,7 @@ export function Menu({ handleSignOut }) {
                     }
 
                     { user.admin === 1 &&
-                    <Link to={"#"}>Dados do restaurante</Link>
+                    <Link to={"/restaurant"}>Dados do restaurante</Link>
                     }
                 </li>
                 <li>

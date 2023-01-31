@@ -61,8 +61,9 @@ export function RestaurantDetails() {
     useEffect(() => {
         async function fetchRestaurantData() {
             const response = await api.get(`/restaurant`);
-            console.log(restaurant)
-            return setRestaurant(response.data);
+            console.log(response)
+            
+            response ? setRestaurant(response.data) : null;
         }
 
         fetchRestaurantData();
