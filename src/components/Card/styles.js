@@ -48,7 +48,7 @@ export const Container = styled.div`
     }
 
     @media (max-width: 770px) {
-        min-width: 240px;
+        width: 240px;
         min-height: 370px;
         padding: 32px 24px;
         margin-right: 28px;
@@ -124,6 +124,10 @@ export const FoodDescription = styled.div`
         text-align: center;
         padding: auto 12px;
         color: ${({ theme }) => theme.COLORS.GRAY_200};
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
     }
 
     @media (max-width: 770px) {
