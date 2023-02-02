@@ -126,9 +126,11 @@ export const FoodDescription = styled.div`
         padding: auto 12px;
         color: ${({ theme }) => theme.COLORS.GRAY_200};
 
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden; 
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        overflow: hidden;
+        width: 284px;
     }
 
     @media (max-width: 770px) {
@@ -144,6 +146,7 @@ export const FoodDescription = styled.div`
         > p {
             font-size: 12px;
             line-height: 14px;
+            width: 216px;
         }
     }
 
