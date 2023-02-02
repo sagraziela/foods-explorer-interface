@@ -49,6 +49,7 @@ export const Container = styled.div`
 
     @media (max-width: 770px) {
         width: 240px;
+        height: 380px;
         min-height: 370px;
         padding: 32px 24px;
         margin-right: 28px;
@@ -130,7 +131,7 @@ export const FoodDescription = styled.div`
         -webkit-line-clamp: 2;
         display: -webkit-box;
         overflow: hidden;
-        width: 284px;
+        width: 262px;
     }
 
     @media (max-width: 770px) {
@@ -146,7 +147,7 @@ export const FoodDescription = styled.div`
         > p {
             font-size: 12px;
             line-height: 14px;
-            width: 216px;
+            width: 212px;
         }
     }
 
