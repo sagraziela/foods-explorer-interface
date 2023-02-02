@@ -9,6 +9,7 @@ export const Container = styled.div`
     justify-content: center;
 
     > p {
+        font-size: 16px;
         color: ${({ theme }) => theme.COLORS.WHITE};
     }
 
@@ -27,6 +28,16 @@ export const Container = styled.div`
                 width: 16px;
                 height: 16px;
             }
+        }
+
+        > p {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 770px) {
+        > p {
+            font-size: 12px;
         }
     }
 `;
