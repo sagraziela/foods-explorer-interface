@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 import { Container, Form } from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
@@ -10,7 +11,9 @@ import arrowLeftImg from "../../assets/icons/arrow_left.svg"
 
 export function NewAdmin() {
     
-    const [state, setState] = useState({ name: "", email: "", password: "", admin: 1 });
+    const [state, setState] = useState({ name: "", email: "", password: "" });
+
+    const { user } = useAuth();
 
     const navigate = useNavigate();
 
@@ -24,7 +27,8 @@ export function NewAdmin() {
         const confirmNewAdmin = confirm("AVISO: O usuário administrador a ser cadastrado terá acesso à todas as configurações de seu site, podendo adicionar, editar e excluir pratos, além de alterar o status dos pedidos e dados do restaurante. Tem certeza que deseja continuar?");
 
         if (confirmNewAdmin) {
-            await api.post("/users", state)
+            console.log(state)
+            await api.post(`/users/${user.id}`, state)
         .then(() => {
             alert("Usuário cadastrado com sucesso");
 

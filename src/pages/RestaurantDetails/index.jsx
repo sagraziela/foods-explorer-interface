@@ -14,6 +14,8 @@ export function RestaurantDetails() {
     
     const [restaurant, setRestaurant] = useState({});
 
+    const { user } = useAuth();
+
     const navigate = new useNavigate();
 
     function handleChange(e) {
@@ -29,7 +31,7 @@ export function RestaurantDetails() {
         
         if (restaurant.id) {
             try {
-                await api.put(`/restaurant`, restaurant);
+                await api.put(`/restaurant/${restaurant.id}`, restaurant);
 
                 alert(`Restaurante atualizado com sucesso!`);
                 navigate("/");
@@ -43,10 +45,12 @@ export function RestaurantDetails() {
             }
         } else {
             try {
-                await api.post(`/restaurant`, restaurant);
-
-                alert(`Os dados do restaurante foram salvos com sucesso!`);
-                navigate("/");
+                console.log(restaurant)
+                await api.post(`/restaurant`, restaurant)
+                .then(() => {
+                    alert(`Os dados do restaurante foram salvos com sucesso!`);
+                    navigate("/");
+                });
 
             } catch(error) {
                 if(error.response) {
@@ -56,14 +60,12 @@ export function RestaurantDetails() {
                 }
             }
         }
-       }
+    }
 
     useEffect(() => {
         async function fetchRestaurantData() {
-            const response = await api.get(`/restaurant`);
-            console.log(response)
-            
-            response ? setRestaurant(response.data) : null;
+            const response = await api.get(`/restaurant/${user.id}`);            
+            response.data ? setRestaurant(response.data) : null;
         }
 
         fetchRestaurantData();
@@ -85,7 +87,7 @@ export function RestaurantDetails() {
                     <Input
                     label="Nome do restaurante"
                     placeholder="Foods Explorer"
-                    value={restaurant.name}
+                    value={restaurant.name ? restaurant.name : null}
                     name="name"
                     onChange={handleChange}
                     />
@@ -93,7 +95,7 @@ export function RestaurantDetails() {
                     <Input
                     label="Endereço"
                     placeholder="Rua xxxxxxx"
-                    value={restaurant.address}
+                    value={restaurant.address ? restaurant.address : null}
                     name="address"
                     onChange={handleChange}
                     />
@@ -102,7 +104,7 @@ export function RestaurantDetails() {
                     type="number"
                     label="Telefone (DDD + num)"
                     placeholder="(xx) xxxxx-xxxx"
-                    value={restaurant.phone_number}
+                    value={restaurant.phone_number ? restaurant.phone_number : null}
                     name="phone_number"
                     onChange={handleChange}
                     />

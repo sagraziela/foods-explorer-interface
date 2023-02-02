@@ -19,12 +19,12 @@ export function AppRoutes() {
                 <Route path="/food-details/:id" element={ <FoodDetails /> } />
                 <Route path="/orders" element={ <ProtectedRoute Page={ Orders } />  } />
                 <Route path="/orders/:id" element={ <Orders /> } />
+                <Route path="/payment" element={ <Payment /> } />
+                <Route path="/favorites" element={ <Favorites /> } />
                 <Route path="/new-food" element={ <ProtectedRoute Page={ NewFood } /> } />
                 <Route path="/edit-food/:id" element={ <ProtectedRoute Page={ EditFood } /> } />
                 <Route path="/new-admin" element={ <ProtectedRoute Page={ NewAdmin } /> } />
                 <Route path="/restaurant" element={ <ProtectedRoute Page={ RestaurantDetails } /> } />
-                <Route path="/payment" element={ <Payment /> } />
-                <Route path="/favorites" element={ <Favorites /> } />
             </Routes>
         </CartProvider>
     )
