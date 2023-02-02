@@ -57,7 +57,7 @@ export const Container = styled.section`
 
     :hover {
       height: 70px;
-      width: ${px2vw(180)};
+      width: ${px2vw(160)};
       background-color: ${({ theme }) => theme.COLORS.GRAY_500};
       border-radius: 8px 8px 0 0;
       gap: 24px;
@@ -89,7 +89,7 @@ export const Container = styled.section`
         position: absolute;
         top: 58px;
         right: 0px;
-        width: ${px2vw(180)};
+        width: ${px2vw(160)};
         gap: 16px;
         text-align: right;
 
@@ -99,7 +99,7 @@ export const Container = styled.section`
 
         > li {
           list-style: none;
-          font-size: ${px2vw(20)};
+          font-size: ${px2vw(16)};
         
           > a {
             text-decoration: none;
@@ -120,11 +120,14 @@ export const Container = styled.section`
 
         :hover {
             height: 60px;
+            width: 110px;
 
             > ul {
-                > li {
-                    font-size: 14px;
-                }
+              width: 110px;
+
+              > li {
+                  font-size: 12px;
+              }
             }
         }
         
@@ -133,6 +136,7 @@ export const Container = styled.section`
     @media (max-width: 430px) {
       width: 40px;
       justify-content: right;
+      margin: 0;
 
         > div {
             width: 24px;
@@ -142,16 +146,13 @@ export const Container = styled.section`
             width: 100px;
             height: 50px;
             position: absolute;
+            right: 8px;
             
             > ul {
                 width: 100px;
                 top: 50px;
                 right: 0;
                 justify-items: right;
-
-                > li {
-                    font-size: 14px;
-                }
             }
         }
     }

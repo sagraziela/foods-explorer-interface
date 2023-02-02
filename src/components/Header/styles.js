@@ -53,9 +53,10 @@ export const Container = styled.header`
   }
 
   > .menuArea {
-    width: ${px2vw(180)};
+    width: ${px2vw(160)};
     height: 40px;
     margin-right: 8px;
+    position: relative;
   }
 
   > :last-child {
@@ -68,6 +69,7 @@ export const Container = styled.header`
 
     > button {
       width: 140px;
+      height: 36px;
       padding: 8px;
     }
   }
@@ -94,6 +96,7 @@ export const Container = styled.header`
 
     > .menuArea {
       width: 30px;
+      position: relative;
     }
   }
 `;
@@ -133,7 +136,7 @@ export const SearchInput = styled.div`
 
   @media (max-width: 770px) {
     padding: 4px 8px;
-    width: 180px;
+    width: 210px;
     height: 36px;
   }
 
