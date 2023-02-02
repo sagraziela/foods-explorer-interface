@@ -89,6 +89,7 @@ export const Container = styled.div`
 `;
 
 export const FoodDescription = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -125,9 +126,9 @@ export const FoodDescription = styled.div`
         padding: auto 12px;
         color: ${({ theme }) => theme.COLORS.GRAY_200};
 
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden; 
     }
 
     @media (max-width: 770px) {
