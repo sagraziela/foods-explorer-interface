@@ -17,6 +17,11 @@ export function SignUp() {
 
     async function handleSignUp(e) {
         e.preventDefault();
+        console.log(state.password.length)
+
+        if (state.password.length < 6) {
+            return alert("Sua senha deve ter o mínimo de 6 (seis) caracteres.");
+        }
 
         await api.post("/users", state)
         .then(() => {
