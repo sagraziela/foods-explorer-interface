@@ -20,16 +20,16 @@ Before you begin, make sure you have the foolowing tools already installed in yo
 
 - Starting frontend:
 
-1. Clone this repository
+1. Clone this repository:
 $ git clone git@github.com:sagraziela/foods-explorer-interface.git
 
-2. Access the project folder in your terminal
+2. Access the project folder in your terminal:
 $ cd foods-explorer-interface
 
-3. Install the dependencies
+3. Install the dependencies:
 $ npm install
 
-4. Run the application in development mode
+4. Run the application in development mode:
 $ npm run dev
 
 
