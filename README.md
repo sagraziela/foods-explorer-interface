@@ -32,6 +32,8 @@ $ npm install
 4. Run the application in development mode:
 $ npm run dev
 
+<h2>Deployed project</h2>
+https://foodsexplorer.netlify.app
 
 <h2>Tech Stack (React + JavaScript)</h2>
     - ReactDOM
