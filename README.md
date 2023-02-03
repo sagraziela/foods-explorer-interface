@@ -43,7 +43,7 @@ $ npm run dev
 
 <h2>Author</h2>
 Graziela Antunes
-LinkedIn: https://www.linkedin.com/in/graziela-antunes-4b544823b/
-email: graziela.atns@gmail.com
+- LinkedIn: https://www.linkedin.com/in/graziela-antunes-4b544823b/
+- E-mail: graziela.atns@gmail.com
 
 👋🏽 Get in Touch!
