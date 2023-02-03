@@ -77,6 +77,7 @@ export const Container = styled.div`
 
         > main {
             flex-direction: column;
+            width: 340px;
         }
     }
 `;
@@ -126,18 +127,11 @@ export const ItemRequest = styled.li`
     }
 
     @media (max-width: 430px) {
+        width: 403px;
 
         > div {
-            > p {
-                font-size: 14px;
-                
-                > span {
-                    font-size: 10px;
-                }
-            }
-
             > button {
-                font-size: 10px;
+                font-size: 14px;
             }
         }
     }

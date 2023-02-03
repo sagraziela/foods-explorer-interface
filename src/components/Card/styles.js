@@ -70,7 +70,7 @@ export const Container = styled.div`
     @media (max-width: 430px) {
         min-width: 130px;
         min-height: 180px;
-        height: 210px;
+        height: 230px;
         padding: 16px 8px;
         margin-right: 16px;
         gap: 12px;
@@ -153,12 +153,14 @@ export const FoodDescription = styled.div`
 
     @media (max-width: 430px) {
         > a {
-            height: 36px;
+            height: 24px;
+            align-items: center;
             
             > h1 {
                 font-size: 14px;
                 line-height: 18px;
                 text-align: center;
+                white-space: normal;
             }
         }
 

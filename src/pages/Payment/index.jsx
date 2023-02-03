@@ -74,7 +74,7 @@ export function Payment() {
                             {cart.map(item => (
                                 <ItemRequest key={item.id}>
                                     <img 
-                                    src={item.picture ? `${api.defaults.baseURL}/foodimg/${item.picture}` : placeholderImg} 
+                                    src={item.picture ? item.picture : placeholderImg} 
                                     alt={`Imagem ${item.title}`} />
 
                                     <div>

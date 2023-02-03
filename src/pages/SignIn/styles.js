@@ -63,18 +63,18 @@ export const Form = styled.form`
         }
     }
 
-    @media (max-width: 500px) {
-        width: ${px2vw(430, 500)};
-        padding: ${px2vw(48, 500)};
-        gap: ${px2vw(32, 500)};
-        border-radius: ${px2vw(12, 500)};
+    @media (max-width: 430px) {
+        width: ${px2vw(430, 430)};
+        padding: ${px2vw(48, 430)};
+        gap: ${px2vw(32, 430)};
+        border-radius: ${px2vw(12, 430)};
 
         > p {
-            font-size: ${px2vw(32, 500)};
+            font-size: ${px2vw(32, 430)};
         }
 
         > a {
-            font-size: ${px2vw(14, 500)};
+            font-size: ${px2vw(14, 430)};
         }
     }
 `;

@@ -29,19 +29,29 @@ export const Container = styled.div`
 
     @media (max-width: 770px) {
         grid-template-rows: 82px auto 64px;
+
+        > main {
+            > a {
+                font-size: 16px;
+                > img {
+                    height: 24px;
+                    width: 16px;
+                }
+            }
+        }
     }
 
     @media (max-width: 430px) {
         grid-template-rows: 60px auto 48px;
 
         > main {
-            margin-top: 24px;
+            margin-top: 16px;
             
             > a {
-                font-size: 12px;
+                font-size: 14px;
 
                 > img {
-                    height: 14px;
+                    height: 20px;
                     width: 14px;
                 }
             }

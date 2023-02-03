@@ -87,7 +87,7 @@ export const Container = styled.div`
     }
 
     @media (max-width: 430px) {
-        width: 270px;
+        width: 100%;
 
         > :first-child {
             height: 48px;
@@ -103,7 +103,7 @@ export const Container = styled.div`
         }
 
         > .qrCode {
-            height: 150px;
+            height: 250px;
 
             > img {
                 height: 130px;

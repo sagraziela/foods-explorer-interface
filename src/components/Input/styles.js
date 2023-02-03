@@ -35,16 +35,15 @@ export const Container = styled.div`
         font-size: 14px;
 
         > input {
-            padding: ${px2vw(16, 770)};
+            padding: ${px2vw(12, 770)};
             font-size: 14px;
             border-radius: 6px;
-
         }
     }
 
     @media (max-width: 430px) {
         > input {
-            padding: ${px2vw(16, 430)};
+            padding: ${px2vw(12, 430)};
             border-radius: 6px;
         }
     }

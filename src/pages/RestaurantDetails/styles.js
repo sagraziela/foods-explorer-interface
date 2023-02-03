@@ -43,12 +43,16 @@ export const Container = styled.div`
             margin-top: 24px;
             
             > a {
-                font-size: 12px;
+                font-size: 14px;
 
                 > img {
-                    height: 14px;
-                    width: 14px;
+                    height: 20px;
+                    width: 16px;
                 }
+            }
+
+            > h1 {
+                font-size: 24px;
             }
         }
     }
@@ -69,7 +73,7 @@ export const Form = styled.form`
 
     @media (max-width: 500px) {
         width: ${px2vw(430, 500)};
-        padding: ${px2vw(48, 500)};
+        padding: 0;
         gap: ${px2vw(32, 500)};
         border-radius: ${px2vw(12, 500)};
     }

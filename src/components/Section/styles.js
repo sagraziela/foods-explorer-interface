@@ -24,7 +24,6 @@ export const Container = styled.section`
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            //background: linear-gradient(90deg, rgba(2,0,36,0) 10%, rgba(0,10,15,1) 100%);
 
             display: flex;
             align-items: center;
@@ -51,13 +50,13 @@ export const Container = styled.section`
         }
 
         > :first-child {
-            left: -23px;
+            left: -26px;
             background: rgb(0,0,0);
             background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,10,15,0.5) 20%, rgba(0,10,15,1) 100%);             
         }
 
         > :last-child {
-            right: -23px;
+            right: -32px;
             background: rgb(0,0,0);
             background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,10,15,0.5) 20%, rgba(0,10,15,1) 100%);
         }
@@ -84,14 +83,34 @@ export const Container = styled.section`
     }
 
     @media (max-width: 430px) {
+        height: 280px;
+
         > h2 {
             font-size: 16px;
             margin-bottom: 12px;
         }
 
         > div {
-            height: 260px;
             gap: 28px;
+        }
+
+        > .wrapper {
+            width: 100%;
+            position: relative;
+
+            > .arrowBtn {
+                width: 60px;
+                height: 100%;
+
+                > button {
+                    
+
+                    > img {
+                        height: 32px;
+                        width: 24px;
+                    }
+                }
+            }
         }
     }
 `;

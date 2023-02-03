@@ -80,7 +80,7 @@ export const Container = styled.header`
 
     > button {
       position: fixed;
-      z-index: 1;
+      z-index: 10;
       bottom: 12px;
       right: 12px;
       min-width: 56px;
