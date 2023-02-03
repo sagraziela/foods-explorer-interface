@@ -239,7 +239,8 @@ export const Textarea = styled.textarea`
 
 export const Ingredients = styled.div`
     width: 100%;
-    height: 76px;
+    min-height: 76px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     gap: 8px;
